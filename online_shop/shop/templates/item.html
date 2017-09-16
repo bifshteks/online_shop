@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	
+	<img src="{{ item.img1.url }}" style="height: 100px">
+	<img src="{{ item.img2.url }}" style="height: 100px">
+	<img src="{{ item.img3.url }}" style="height: 100px">
+	<img src="{{ item.img4.url }}" style="height: 100px">
+	{{ item.title }} <br>
+	{{ item.description }} <br>
+	{{ item.price }} <br>
+
+	<input type="hidden" value="{{ item.id }}" class="items-id">
+	<button class="add-to-cart">Add to the cart</button>
+
+	<a href="{% url 'cart' %}">Link to the cart</a>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{% static 'js/jquery.session.js' %}"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		if ($.session.get('order') == undefined) {
+			$.session.set('order', '');
+		};
+		$(".add-to-cart").click(function(){
+
+			
+			var cart = $.session.get("order");
+			// alert(cart);
+			// alert(cart)
+			// $(this).closest('input').val('qwe');
+			var chosen_item_id = $(this).prev().val();
+			alert(chosen_item_id);
+			$.session.set("order", cart + " " + chosen_item_id);
+			// var qwerty = $(this).prev().val();
+			var new_cart = $.session.get("order");
+			alert(cart);
+			// alert(cart);
+		});
+	});
+</script>
+
+{% endblock %}
