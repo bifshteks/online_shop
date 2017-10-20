@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SHOP</title>
+</head>
+<body>
+	<div class="header" style="height: 50px; background-color: blue; ">
+		<a href="{% url 'index' %}">Main page</a>
+		<a href="{% url 'cart' %}">Your cart</a>
+	</div>
+		
+	{% block content %}
+	{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
