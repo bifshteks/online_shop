@@ -1,480 +1,291 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
 {% load static %}
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class=""><!--<![endif]-->
-<head>
-	<meta charset="utf-8">
+{% load my_tags %}
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %}Блог{% endblock %}
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block link %}
+<style>
 
-	<title>Maxshop - Blog</title>
+	.load_more_text {
+		display: none;
+	}
 
-	<!-- Standard Favicon -->
-	<link rel="icon" type="image/x-icon" href="{% static 'images//favicon.ico' %}" />
-	
-	<!-- For iPhone 4 Retina display: -->
-	<link rel="apple-touch-icon-precomposed" href="{% static 'images//apple-touch-icon-114x114-precomposed.png' %}">
-	
-	<!-- For iPad: -->
-	<link rel="apple-touch-icon-precomposed" href="{% static 'images//apple-touch-icon-72x72-precomposed.png' %}">
-	
-	<!-- For iPhone: -->
-	<link rel="apple-touch-icon-precomposed" href="{% static 'images//apple-touch-icon-57x57-precomposed.png' %}">	
-	
-	<!-- Library - Google Font Familys -->
-	<link href="https://fonts.googleapis.com/css?family=Arizonia|Crimson+Text:400,400i,600,600i,700,700i|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-	
-	<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
- 
-	<!-- RS5.0 Layers and Navigation Styles -->
-	<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/navigation.css' %}">
-	
-	<!-- Library - Bootstrap v3.3.5 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'libraries/lib.css' %}">
-	
-	<!-- Custom - Common CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/plugins.css' %}">			
-	<link rel="stylesheet" type="text/css" href="{% static 'css/navigation-menu.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/shortcode.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	
-	
-	<!--[if lt IE 9]>
-		<script src="{% static 'js/html5/respond.min.js' %}"></script>
-    <![endif]-->
-	
-</head>
+	.loader{
+	    -webkit-animation: preloader 1.5s infinite linear;
+	    -moz-animation: preloader 1.5s infinite linear;
+	    -ms-animation: preloader 1.5s infinite linear;
+	    -o-animation: preloader 1.5s infinite linear;
+	    animation: preloader 1.5s infinite linear;
+	}
 
-<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
-	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
-			</div>
-		</div><!-- Loader /- -->	
+	@-webkit-keyframes preloader {
+	    to { -webkit-transform: rotate(360deg); }
+	}
+
+	@-moz-keyframes preloader {
+	    to { -moz-transform: rotate(360deg); }
+	}
+
+	@-ms-keyframes preloader {
+	    to { -ms-transform: rotate(360deg); }
+	}
+
+	@-o-keyframes preloader {
+	    to { -o-transform: rotate(360deg); }
+	}
+
+	@keyframes preloader {
+	    to { transform: rotate(360deg); }
+	}
+</style>
+<!-- 	<script>
+	(function($) {
+    var truncate = function(el) {
+        var text = el.text(),
+            height = el.height(),
+            clone = el.clone();
+
+	  clone.css({
+            position: 'absolute',
+            visibility: 'hidden',
+            height: 'auto'
+        });
+        el.after(clone);
+
+        var l = text.length - 1;
+        for (; l >= 0 && clone.height() > height; l = l - 50) {
+            clone.text(text.substring(0, l) + '...');
+        }
+
+        el.text(clone.text());
+        clone.remove();
+    };
+
+    $.fn.truncateText = function() {
+        return this.each(function () {
+            truncate($(this));
+        });
+    };
+}(jQuery));
+</script>
+<script>
+	$(document).ready(function(){
+		$(function() {
+		    // $('.sb_price').truncateText();
+		});
+	})
+</script> -->
+{% endblock %}		
+
+{% block body_class %}page-template page-template-tpl-blog page-template-tpl-blog-php page page-id-12{% endblock %}
+
+
+{% block content %}
+<section id="content">
+	<div class="container">
+	
+		<div class="single_left">
 		
-		<!-- Header -->
-		<header class="header-section header-section-1 container-fluid no-padding">
-			
-			<!-- Middel Header -->
-			<div class="middel-header">
-				<!-- Container -->
-				<div class="container">
-					<!-- Logo Block -->
-					<div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-						<a href="index.html" class="navbar-brand">Max <span>shop</span></a>
-					</div><!-- Logo Block /- -->
-					<!-- Search Block -->
-					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
-						<div class="input-group">
-							<input class="form-control" placeholder="Search You Wants Here . . ." type="text">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-						</div>
-					</div><!-- Search Block /- -->
-					<!-- Menu Icon -->
-					<div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-						<ul class="cart">
-							<li>
-								<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
-								<ul class="dropdown-menu no-padding">
-									<li class="mini_cart_item">
-										<a title="Remove this item" class="remove" href="#">&#215;</a>
-										<a href="#" class="shop-thumbnail">
-											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="{% static 'images/product-wishlist-1.jpg' %}">Flying Ninja
-										</a>
-										<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="mini_cart_item">
-										<a title="Remove this item" class="remove" href="#">&#215;</a>
-										<a href="#" class="shop-thumbnail">
-											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="{% static 'images/product-wishlist-2.jpg' %}">Flying Ninja
-										</a>
-										<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="button">
-										<a href="{% url 'cart' %}" title="View Cart">View Cart</a>
-										<a href="#" title="Check Out">Check out</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div><!-- Menu Icon /- -->
-				</div><!-- Container /- -->
-			</div><!-- Middel Header /- -->
-			
-			<!-- Menu Block -->
-			<div class="container-fluid no-padding menu-block">
-				<!-- Container -->
-				<div class="container">
-					<!-- nav -->
-					<nav class="navbar navbar-default ow-navigation">
-						<div class="navbar-header">
-							<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<a href="index.html" class="navbar-brand">Max <span>shop</span></a>
-						</div>
-						<div class="navbar-collapse collapse" id="navbar">
-							<ul class="nav navbar-nav">
-								<li>
-									<a href="{% url 'index' %}" title="Home" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Главная</a>
-								</li>
-								<li>
-									<a href="{% url 'shop' %}" title="Shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Магазин</a>
-								</li>
-								<li class="active">
-									<a href="{% url 'blog' %}" title="Blog" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Блог</a>
-								</li>
-								<li><a href="{% url 'about' %}" title="About Us">О нас</a></li>
-								<li><a href="{% url 'contacts' %}" title="Contact Us">Контакты</a></li>
-							</ul>
-						</div><!--/.nav-collapse -->
-					</nav><!-- nav /- -->
-				</div><!-- Container /- -->
-			</div><!-- Menu Block /- -->
-		</header><!-- Header /- -->
+			<div id="posts_cont">
 		
-		<main>
-			<!-- Page Banner -->
-			<div class="page-banner container-fluid no-padding">
-				<!-- Container -->
-				<div class="container">
-					<div class="banner-content">
-						<h3>Our Blog</h3>
-						<p>our vision is to be Earth's most customer centric company</p>
-					</div>
-					<ol class="breadcrumb">
-						<li><a href="index.html" title="Home">Home</a></li>							
-						<li class="active">Blog</li>
-					</ol>
-				</div><!-- Container /- -->
-			</div><!-- Page Banner /- -->
-			
-			<!-- Container -->
-			<div class="container">
-				<!-- Content Area -->
-				<div class="content-area blog-section col-md-8 col-sm-8 col-xs-12">
-					<div class="type-post">
-						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a href="blog-post.html"><img src="{% static 'images/blog-1.jpg' %}" alt="blog"></a>
-							<span class="post-date"><a href="#"><i class="fa fa-calendar-o"></i>July 16</a></span>
+				    {% for post in posts %}
+					<div class="blog_box {% if forloop.last %}blog_box_last{% endif %} ">
+						<div>
+							<a href="{% url 'post' post.id %}">
+								<img width="930" height="400" src="{{ post.img.url }}" class="attachment-st-blog-image size-st-blog-image wp-post-image" alt="" />
+							</a>
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title"><a title="new Collectios are imported In Our shop." href="blog-post.html">new Collectios are <span>imported</span> In Our shop.</a></h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="224 Likes"><i class="fa fa-heart-o"></i>224 Likes</a></span>
-								<span class="post-admin"><i class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was tossed. If not for the courage of the fearless If not for the courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
+						<div class="sb_title">
+							<a href="{% url 'post' post.id %}">{{ post.title }}</a>
 						</div>
-					</div>
-					
-					<div class="type-post">
-						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a href="blog-post.html"><img src="{% static 'images/blog-2.jpg' %}" alt="blog"></a>
-							<span class="post-date"><a href="#"><i class="fa fa-calendar-o"></i>May 22</a></span>
+						<div class="sb_price">
+							{{ post.text|cut_text:460 }}
 						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title"><a title="Our shop visitor's new look" href="blog-post.html">Our shop visitor's <span>new look</span></a></h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="145 Likes"><i class="fa fa-heart-o"></i>145 Likes</a></span>
-								<span class="post-admin"><i class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was tossed. If not for the courage of the fearless If not for the courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="type-post">
-						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a href="blog-post.html"><img src="{% static 'images/blog-3.jpg' %}" alt="blog"></a>
-							<span class="post-date"><a href="#"><i class="fa fa-calendar-o"></i>June 18</a></span>
-						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title"><a title="buyers are saying it's good shop" href="blog-post.html">buyers are saying it's <span>good shop</span></a></h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="150 Likes"><i class="fa fa-heart-o"></i>150 Likes</a></span>
-								<span class="post-admin"><i class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was tossed. If not for the courage of the fearless If not for the courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="type-post">
-						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a href="blog-post.html"><img src="{% static 'images/blog-4.jpg' %}" alt="blog"></a>
-							<span class="post-date"><a href="#"><i class="fa fa-calendar-o"></i>July 14	</a></span>
-						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title"><a title="Happy Customers enjoying in the street" href="blog-post.html">Happy Customers <span>enjoying</span> in the street</a></h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="230 Likes"><i class="fa fa-heart-o"></i>230 Likes</a></span>
-								<span class="post-admin"><i class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was tossed. If not for the courage of the fearless If not for the courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="type-post">
-						<div class="col-md-5 col-sm-12 col-xs-12 no-padding entry-cover">
-							<a href="blog-post.html"><img src="{% static 'images/blog-5.jpg' %}" alt="blog"></a>
-							<span class="post-date"><a href="#"><i class="fa fa-calendar-o"></i>May 17</a></span>
-						</div>
-						<div class="col-md-7 col-sm-12 col-xs-12 blog-content">
-							<h3 class="entry-title"><a title="Best Solds in the this year was watches " href="blog-post.html">Best Solds in the this year was <span>watches</span> </a></h3>
-							<div class="entry-meta">
-								<span class="post-like"><a href="#" title="120 Likes"><i class="fa fa-heart-o"></i>120 Likes</a></span>
-								<span class="post-admin"><i class="fa fa-user"></i>Posted By<a href="#" title="Max">Max</a></span>
-							</div>
-							<div class="entry-content">
-								<p>The weather started getting rough - the tiny ship was tossed. If not for the courage of the fearless If not for the courage of the Minnow would be lost.</p>
-								<a href="blog-post.html" title="Read More" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
-							</div>
-						</div>
-					</div>
-				</div><!-- Content Area /- -->
+						<p>
+							<a href="{% url 'post' post.id %}" class="read_more" data-id="{{ post.id }}">READ MORE</a>
+						</p>
+					</div><!--//blog_box-->
+					{% endfor %}
+								
+					<!-- <div class="blog_box ">
+						<div><a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/"><img width="930" height="400" src="http://dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/blog2-930x400.jpg" class="attachment-st-blog-image size-st-blog-image wp-post-image" alt="" /></a></div>
+						<div class="sb_title"><a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/">With This Free Shopper Theme we can Sell Product</a></div>
+						<div class="sb_price">
+
+Design have always been related, but today, experimentation and personal expression are the name of the game. Homeowners are using art to make a personal statement – your art choice has to inject a fresh outlook and say something unique about your home and you.Art and design have always been related, but today, experimentation and personal expression are the name of the game. Homeowners are using art to make a personal statement – your art choice has to ...</div>
+						<p><a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/" class="read_more">READ MORE</a></p>
+					</div> --><!--//blog_box-->
 				
-				<!-- Widget Area -->
-				<div class="col-md-4 col-sm-4 col-xs-12 widget-area">
-					<!-- Widget Search -->
-					<aside class="widget widget_search">
-						<h3 class="widget-title">Search</h3>
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search You Wants. . .">
-							<span class="input-group-btn">
-								<button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-						</div>
-					</aside><!-- Widget Search /- -->
-					<!-- Widget Categories -->
-					<aside class="widget widget_categories">
-						<h3 class="widget-title">Categories</h3>
-						<ul>
-							<li><a href="#" title="Beautiful Chairs">Beautiful Chairs <span>(5)</span></a></li>
-							<li><a href="#" title="Creative Designs">Creative Designs <span>(6)</span></a></li>
-							<li><a href="#" title="Trendy Products">Trendy Products <span>(4)</span></a></li>
-							<li><a href="#" title="Interior Products">Interior Products <span>(2)</span></a></li>
-							<li><a href="#" title="Popular Products">Popular Products <span>(8)</span></a></li>
-							<li><a href="#" title="Casual Shirts">Casual Shirts <span>(7)</span></a></li>
-						</ul>
-					</aside><!-- Widget Categories /-  -->
-					<!-- Widget Latest Post -->
-					<aside class="widget widget_latest_post">
-						<h3 class="widget-title">recent posts</h3>
-						<div class="latest-box">
-							<div class="post-box">
-								<a href="#"><img src="{% static 'images/latest-post-1.jpg' %}" alt="Post"></a>
-								<h5><a href="#" title="need max shop.">need max shop</a></h5>
-								<span><a class="calendar" href="#"><i class="fa fa-calendar-o"></i>July 20, 2016</a><a href="#"><i class="fa fa-heart-o"></i> 224 Likes</a><a href="#">Posted By Max</a></span>
-							</div>
-						</div>
-						<div class="latest-box">
-							<div class="post-box">
-								<a href="#"><img src="{% static 'images/latest-post-2.jpg' %}" alt="Post"></a>
-								<h5><a href="#" title="Commenly use products">Commenly use products</a></h5>
-								<span><a class="calendar" href="#"><i class="fa fa-calendar-o"></i>June 18, 2016</a><a href="#"><i class="fa fa-heart-o"></i> 224 Likes</a><a href="#">Posted By Max</a></span>
-							</div>
-						</div>
-						<div class="latest-box">
-							<div class="post-box">
-								<a href="#"><img src="{% static 'images/latest-post-3.jpg' %}" alt="Post"></a>
-								<h5><a href="#" title="chairs are beautiful">chairs are beautiful</a></h5>
-								<span><a class="calendar" href="#"><i class="fa fa-calendar-o"></i>May 23, 2016</a><a href="#"><i class="fa fa-heart-o"></i> 224 Likes</a><a href="#">Posted By Max</a></span>
-							</div>
-						</div>
-					</aside><!-- Widget Latest Post /- -->
-					<!-- Widget Tags -->
-					<aside class="widget widget_tags">
-						<h3 class="widget-title">popular tags</h3>
-						<div class="tags-box">
-							<a href="#" title="Chairs">Chairs</a>
-							<a href="#" title="Modern Designs">Modern Designs</a>
-							<a href="#" title="Watches">Watches</a>
-							<a href="#" title="Future">Future</a>
-							<a href="#" title="Popular Products">Popular Products</a>
-							<a href="#" title="Trendy">Trendy</a>
-							<a href="#" title="Interier">Interier</a>
-							<a href="#" title="Modern">Modern</a>
-						</div>
-					</aside><!-- Widget Tags -->
-					<!-- Widget Tags -->
-					<aside class="widget widget_tweets">
-						<h3 class="widget-title">latest tweets</h3>
-						<!-- Main Carousel -->
-						<div id="main-carousel1" class="carousel slide carousel-fade" data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#main-carousel1" data-slide-to="0" class="active"></li>
-								<li data-target="#main-carousel1" data-slide-to="1"></li>
-								<li data-target="#main-carousel1" data-slide-to="2"></li>
-							</ol>
-							<div role="listbox" class="carousel-inner">
-								<div class="item active">
-									<h5>tweet@John max</h5>
-									<p>MAX SHOP - Creative Minimal Portfolio WordPress Theme by @ifathemes</p>
-									<a href="#">http://goo.gl/6CbMtH</a>
-									<span>5 Hours ago</span>
-								</div>
-								<div class="item">
-									<h5>tweet@John max</h5>
-									<p>MAX SHOP - Creative Minimal Portfolio WordPress Theme by @ifathemes</p>
-									<a href="#">http://goo.gl/6CbMtH</a>
-									<span>5 Hours ago</span>
-								</div>
-								<div class="item">
-									<h5>tweet@John max</h5>
-									<p>MAX SHOP - Creative Minimal Portfolio WordPress Theme by @ifathemes</p>
-									<a href="#">http://goo.gl/6CbMtH</a>
-									<span>5 Hours ago</span>
-								</div>
-							</div>
-						</div>
-					</aside>
-				</div><!-- Widget Area /- -->
+								     	
+					<!-- <div class="blog_box blog_box_last">
+						<div><a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/"><img width="930" height="400" src="http://dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/blog3-930x400.jpg" class="attachment-st-blog-image size-st-blog-image wp-post-image" alt="" /></a></div>
+						<div class="sb_title"><a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/">New Product Will Sell If Your Product is Amazing</a></div>
+						<div class="sb_price">
+
+Art and design have always been related, but today, experimentation and personal expression are the name of the game. Homeowners are using art to make a personal statement – your art choice has to inject a fresh outlook and say something unique about your home and you.Art and design have always been related, but today, experimentation and personal expression are the name of the game. Homeowners are using art to make a personal statement – your art choice ...</div>
+						<p><a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/" class="read_more">READ MORE</a></p>
+					</div><!-//blog_box-->
 				
-				<nav class="ow-pagination">
-					<ul class="pager">
-						<li class="number"><a href="#">4</a></li>
-						<li class="load-more"><a href="#">Load More</a></li>
-						<li class="previous"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-					</ul>
-				</nav>
-			</div><!-- Container /- -->
-		</main>
+				<div class="blog_box clear"></div>								
+				<div class="clear"></div>
+			
+			</div> <!--//posts_cont-->
+			
+			<div class="load_more_cont">
+				<div align="center">
+					<div class="load_more_text">
+						<a href="#" >
+							<img class="loader" src="http://dessign.net/shopper-woocommerce-theme/wp-content/themes/ShopperWooThemePremium3/images/loading-button.png" />
+						</a>				
+					</div>
+				</div>
+			</div><!--//load_more_cont-->          			
+			
+			 
 		
-		<!-- Footer Main 1 -->
-		<footer id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
-			<!-- Container -->
-			<div class="container">
-				<div class="services-item">
-					<div class="col-md-4 col-sm-6 col-xs-6">
-						<div class="srv-box">
-							<i class="icon icon-Truck"></i><h5>Free delivery</h5><i class="icon icon-Dollar"></i>
-							<span class="icon_close"></span>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6">
-						<div class="srv-box">
-							<i class="icon icon-Goto"></i><h5>Money Back</h5><i class="icon icon-Dollars"></i>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6">
-						<div class="srv-box">
-							<i class="icon icon-Headset"></i><h5>24/7 support</h5><i class="icon icon-Timer"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Widget About -->
-				<aside class="col-md-3 col-sm-6 col-xs-6 ftr-widget widget_about">
-					<a href="index.html" title="Max Shop">Max <span>Shop</span></a>
-					<p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
-					<ul class="social">
-						<li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#" title="Tumblr"><i class="fa fa-tumblr"></i></a></li>
-						<li><a href="#" title="Vimeo"><i class="fa fa-vimeo"></i></a></li>
-					</ul>
-				</aside><!-- Widget About /- -->
-				<!-- Widget Links -->
-				<aside class="col-md-2 col-sm-6 col-xs-6 ftr-widget widget_links">
-					<h3 class="widget-title">Popular Links</h3>
+		</div><!--//single_left-->
+		
+				<div id="sidebar">
+	
+				<div class="side_box">		
+					<h3 class="side_title">Recent Posts</h3>		
 					<ul>
-						<li><a href="index.html#product-section" title="Popular Products">Popular Products</a></li>
-						<li><a href="index.html#selling" title="Best Selling">Best Selling</a></li>
-						<li><a href="about.html" title="About Us">About Us</a></li>
-						<li><a href="index.html#dealing" title="Deal Of The Day">Deal Of The Day</a></li>
-						<li><a href="index.html#collection" title="Product Collections">Product Collections</a></li>
-						<li><a href="contact-us.html" title="Contact Us">Contact Us</a></li>
+						<li>
+							<a href="http://dessign.net/shopper-woocommerce-theme/shopper-woocommerce-wordpress-theme-will-help-you-sell/">Shopper Woocommerce wordpress theme will help you sell</a>
+						</li>
+						<li>
+							<a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/">With This Free Shopper Theme we can Sell Product</a>
+						</li>
+						<li>
+							<a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/">New Product Will Sell If Your Product is Amazing</a>
+						</li>
+						<li>
+							<a href="http://dessign.net/shopper-woocommerce-theme/this-is-blog-post-here/">Creative Blog Post To Sell Your Product</a>
+						</li>
+						<li>
+							<a href="http://dessign.net/shopper-woocommerce-theme/hello-world/">Hello world!</a>
+						</li>
 					</ul>
-				</aside><!-- Widget Links /- -->
-				<!-- Widget Account -->
-				<aside class="col-md-3 col-sm-6 col-xs-6 ftr-widget widget_links widget_account">
-					<h3 class="widget-title">my account</h3>
-					<ul>
-						<li><a href="#" title="My Order Details">My Order Details</a></li>
-						<li><a href="#" title="My credit Offers">My credit Offers</a></li>
-						<li><a href="#" title="My addresses">My addresses</a></li>
-						<li><a href="#" title="My Personal Details">My Personal Details</a></li>
-						<li><a href="#" title="My Account Details">My Account Details</a></li>
-					</ul>
-				</aside><!-- Widget Account /- -->
-				<!-- Widget Gallery -->
-				<aside class="col-md-4 col-sm-6 col-xs-6 ftr-widget widget_gallery">
-					<h3 class="widget-title">collections</h3>
-					<ul>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-1.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-2.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-3.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-4.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-5.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-6.jpg' %}" alt="ftr-latestpost"></a></li>
-					</ul>
-				</aside><!-- Widget Gallery -->
-				<div class="copyright-section">
-					<div class="coyright-content">
-						<p>&copy; Max shop. all rights reserved</p>
-					</div>	
-					<ul>
-						<li><a href="#" title="Delivery Information">Delivery Information</a></li>
-						<li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
-						<li><a href="#" title="Terms & Condition">Terms & Condition</a></li>
-					</ul>
-				</div>
-			</div><!-- Container /- -->
-		</footer><!-- Footer Main 1 -->
+				</div>		
+				
+			</div><!--//sidebar-->		
+		<div class="clear"></div>
+		
+	</div><!--//container-->
+</section><!--//content-->
+{% endblock %}
 
-	</div>
-	
-	<!-- JQuery v1.12.4 -->
-	<script src="{% static 'js/jquery.min.js' %}"></script>
 
-	<!-- Library - Js -->
-	<script src="{% static 'libraries/lib.js' %}"></script>
-	
-	<script src="{% static 'libraries/jquery.countdown.min.js' %}"></script>
-	
-	<!-- RS5.0 Core JS Files -->
-	<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.tools.min.js?rev=5.0' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.revolution.min.js?rev=5.0' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
-	
-	<!-- Library - Google Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
+{% block script %}
+<form id="csrf-form" name="csrfmiddlewaretoken" action="{% url 'get_more_posts' %}">{% csrf_token %}</form>
+<script type="text/javascript">
+      $(document).ready(function () {
 
-	<!-- Library - Theme JS -->
-	<script src="{% static 'js/functions.js' %}"></script>
-	
-</body>
-</html>
+      		var isLast = false;
+
+            function morePosts() {
+
+
+
+				var url = $('#csrf-form').attr('action');
+				var item_id = $('#posts_cont .blog_box:not(.clear)').last().find('a.read_more').data('id');
+				var data = {};
+				data.last_id = item_id;
+				var csrf_token = $('#csrf-form [name="csrfmiddlewaretoken"]').val();
+				data["csrfmiddlewaretoken"] = csrf_token;
+
+
+				$.ajax({
+					url: url,
+					type: 'POST',
+					data: data,
+					cache: true,
+					success: function (data) {
+						if ( data.is_it_last == true ) {
+							isLast = true;
+						};
+
+						console.log('OK');
+						var len = data.item.length;
+						$.each(data.item, function(k, v){
+							var post_class = '';
+
+							if ( k == len - 1 ) {
+								post_class = 'blog_box blog_box_last'
+							} else {
+								post_class = 'blog_box'
+							};
+
+							$('.blog_box.clear').before('\
+							<div class="' + post_class + '">\
+								<div>\
+									<a href="' + v.post_url + '">\
+										<img width="930" height="400" src="' + v.img_url + '" class="attachment-st-blog-image size-st-blog-image wp-post-image" alt="" />\
+									</a>\
+								</div>\
+								<div class="sb_title">\
+									<a href="' + v.post_url + '">' + v.post_title + '</a>\
+								</div>\
+								<div class="sb_price">\
+									' + v.post_short_text + '\
+								</div>\
+								<p>\
+									<a href="' + v.post_url + '" class="read_more" data-id="' + v.post_id + '">READ MORE</a>\
+								</p>\
+							</div><!--//blog_box-->');
+						});
+					},
+					error: function(){
+						console.log("error");
+					}
+				});
+
+
+
+            };
+
+            //When scroll down, the scroller is at the bottom with the function below and fire the morePosts function
+            $(window).scroll(function () {
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                	var loader_block = $('.load_more_text').first();
+                	if ( !loader_block.hasClass('absolute_closed') ) {
+
+	                	loader_block.css('display', 'unset');
+	                    morePosts();
+	                    loader_block.css('display', 'none');
+	                    if ( isLast == true ) {
+	                    	loader_block.addClass('absolute_closed');
+	                    };
+                	};
+                };
+            });
+        });
+
+</script>	
+﻿{% endblock %}
+<!-- <script type='text/javascript'>
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/blog\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"http:\/\/dessign.net\/shopper-woocommerce-theme\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script> -->
+<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=3.0.3'></script>
+<script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>
+<script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.3'></script> -->
+<!-- <script type='text/javascript'>
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/blog\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script> -->
+<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.0.3'></script> -->
+<!-- <script type='text/javascript'>
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/blog\/?wc-ajax=%%endpoint%%","fragment_name":"wc_fragments"};
+/* ]]> */
+</script> -->
+<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.0.3'></script> -->
+<!-- <script type='text/javascript' src='http://dessign.net/shopper-woocommerce-theme/wp-includes/js/wp-embed.min.js?ver=4.8.2'></script> -->
+<!-- <script src="{% static 'js/scripts.js' %}"></script>  -->
+
 	

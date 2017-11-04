@@ -6,6 +6,7 @@ from django.db import models
 
 class Category(models.Model):
 	name = models.CharField(max_length=255, unique=True, verbose_name="Название категории")
+	discount = models.IntegerField(verbose_name="Скидка в процентах", blank=True, default=0)
 
 	class Meta():
 		verbose_name = 'Категория'
@@ -20,11 +21,12 @@ class Product(models.Model):
 	slug = models.CharField(max_length=255, verbose_name="Краткое описание")
 	description = models.TextField(verbose_name="Описание")
 	price = models.IntegerField(verbose_name="Цена")
-	category = models.ForeignKey(Category, verbose_name="Категория")
+	category = models.ForeignKey(Category, verbose_name="Категория", default=None)
 	img1 = models.FileField(upload_to='', verbose_name="Изображение 1")
-	img2 = models.FileField(upload_to='', verbose_name="Изображение 2")
-	img3 = models.FileField(upload_to='', verbose_name="Изображение 3")
-	img4 = models.FileField(upload_to='', verbose_name="Изображение 4")
+	discount = models.IntegerField(verbose_name="Скидка в процентах", blank=True, default=0)
+	# img2 = models.FileField(upload_to='', verbose_name="Изображение 2")
+	# img3 = models.FileField(upload_to='', verbose_name="Изображение 3")
+	# img4 = models.FileField(upload_to='', verbose_name="Изображение 4")
 
 	class Meta():
 		verbose_name = 'Товар'
@@ -32,6 +34,11 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.title
+
+	def get_discount_price(self):
+		price_with_self_discount =  int(self.price * (100 - self.discount) / 100)
+		price_with_category_discount =  int(self.price * (100 - self.category.discount) / 100)
+		return min([price_with_self_discount, price_with_category_discount])
 
 
 class ItemsInCart(models.Model):
@@ -51,7 +58,7 @@ class ItemsInCart(models.Model):
 
 
 	def save(self, *args, **kwargs):
-		price_per_item = self.item.price
+		price_per_item = self.item.get_discount_price()
 		self.price_per_item = price_per_item
 		self.total_price = int(self.amount) * price_per_item
 		print(self.total_price)

@@ -1,512 +1,292 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class=""><!--<![endif]-->
-<head>
-	<meta charset="utf-8">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block title %}Каталог{% endblock %}
 
-	<title>Maxshop - Shop</title>
+{% block body_class %}archive tax-product_cat term-all-product term-6 woocommerce woocommerce-page{% endblock %}
 
-	<!-- Standard Favicon -->
-	<link rel="icon" type="image/x-icon" href="{% static 'images//favicon.ico' %}" />
-	
-	<!-- For iPhone 4 Retina display: -->
-	<link rel="apple-touch-icon-precomposed" href="{% static 'images//apple-touch-icon-114x114-precomposed.png' %}">
-	
-	<!-- For iPad: -->
-	<link rel="apple-touch-icon-precomposed" href="{% static 'images//apple-touch-icon-72x72-precomposed.png' %}">
-	
-	<!-- For iPhone: -->
-	<link rel="apple-touch-icon-precomposed" href="{% static 'images//apple-touch-icon-57x57-precomposed.png' %}">	
-	
-	<!-- Library - Google Font Familys -->
-	<link href="https://fonts.googleapis.com/css?family=Arizonia|Crimson+Text:400,400i,600,600i,700,700i|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-	
-	<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
- 
-	<!-- RS5.0 Layers and Navigation Styles -->
-	<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/navigation.css' %}">
-	
-	<!-- Library - Bootstrap v3.3.5 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'libraries/lib.css' %}">
-	
-	<!-- Custom - Common CSS -->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/plugins.css' %}">			
-	<link rel="stylesheet" type="text/css" href="{% static 'css/navigation-menu.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/shortcode.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	
-	
-	<!--[if lt IE 9]>
-		<script src="{% static 'js/html5/respond.min.js' %}"></script>
-    <![endif]-->
-	
-</head>
 
-<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
-	<div class="main-container">
-		<!-- Loader -->
-		<div id="site-loader" class="load-complete">
-			<div class="loader">
-				<div class="loader-inner ball-clip-rotate">
-					<div></div>
-				</div>
+{% block link %}
+<style type="text/css">#sidebar { display: none; } .woocommerce-pagination { display: none; }</style>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+	<div id="container">
+		<div id="content" role="main">
+			<div class="archive_header_left">
+				<h1 class="page-title">{{ category_name }}</h1>
+	
 			</div>
-		</div><!-- Loader /- -->	
+
+
+
 		
-		<!-- Header -->
-		<header class="header-section header-section-1 container-fluid no-padding">
-			
-			<!-- Middel Header -->
-			<div class="middel-header">
-				<!-- Container -->
-				<div class="container">
-					<!-- Logo Block -->
-					<div class="col-md-4 col-sm-6 col-xs-12 logo-block">
-						<a href="index.html" class="navbar-brand">Max <span>shop</span></a>
-					</div><!-- Logo Block /- -->
-					<!-- Search Block -->
-					<div class="col-md-5 col-sm-6 col-xs-6 search-block">
-						<div class="input-group">
-							<input class="form-control" placeholder="Search You Wants Here . . ." type="text">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button"><i class="icon icon-Search"></i></button>
-							</span>
-						</div>
-					</div><!-- Search Block /- -->
-					<!-- Menu Icon -->
-					<div class="col-md-3 col-sm-6 col-xs-6 menu-icon">
-						<ul class="cart">
-							<li>
-								<a aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="cart" class="btn dropdown-toggle" title="Add To Cart" href="#"><i class="icon icon-ShoppingCart"></i></a>
-								<ul class="dropdown-menu no-padding">
-									<li class="mini_cart_item">
-										<a title="Remove this item" class="remove" href="#">&#215;</a>
-										<a href="#" class="shop-thumbnail">
-											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="{% static 'images/product-wishlist-1.jpg' %}">Flying Ninja
-										</a>
-										<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="mini_cart_item">
-										<a title="Remove this item" class="remove" href="#">&#215;</a>
-										<a href="#" class="shop-thumbnail">
-											<img alt="poster_2_up" class="attachment-shop_thumbnail" src="{% static 'images/product-wishlist-2.jpg' %}">Flying Ninja
-										</a>
-										<span class="quantity">2 &#215; <span class="amount">Rs.12.00</span></span>
-									</li>
-									<li class="button">
-										<a href="{% url 'cart' %}" title="View Cart">View Cart</a>
-										<a href="#" title="Check Out">Check out</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div><!-- Menu Icon /- -->
-				</div><!-- Container /- -->
-			</div><!-- Middel Header /- -->
-			
-			<!-- Menu Block -->
-			<div class="container-fluid no-padding menu-block">
-				<!-- Container -->
-				<div class="container">
-					<!-- nav -->
-					<nav class="navbar navbar-default ow-navigation">
-						<div class="navbar-header">
-							<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<a href="index.html" class="navbar-brand">Max <span>shop</span></a>
-						</div>
-						<div class="navbar-collapse collapse" id="navbar">
-							<ul class="nav navbar-nav">
-								<li>
-									<a href="{% url 'index' %}" title="Home" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Главная</a>
-								</li>
-								<li class="active">
-									<a href="{% url 'shop' %}" title="Shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Магазин</a>
-								</li>
-								<li>
-									<a href="{% url 'blog' %}" title="Blog" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Блог</a>
-								</li>
-								<li><a href="{% url 'about' %}" title="About Us">О нас</a></li>
-								<li><a href="{% url 'contacts' %}" title="Contact Us">Контакты</a></li>
-							</ul>
-						</div><!--/.nav-collapse -->
-					</nav><!-- nav /- -->
-				</div><!-- Container /- -->
-			</div><!-- Menu Block /- -->
-		</header><!-- Header /- -->
+
 		
-		<main>
-			<!-- Page Banner -->
-			<div class="page-banner container-fluid no-padding">
-				<!-- Container -->
-				<div class="container">
-					<div class="banner-content">
-						<h3>Shop</h3>
-						<p>our vision is to be Earth's most customer centric company</p>
-					</div>
-					<ol class="breadcrumb">
-						<li><a href="index.html" title="Home">Home</a></li>							
-						<li class="active">Shop</li>
-					</ol>
-				</div><!-- Container /- -->
-			</div><!-- Page Banner /- -->
-			
-			<!-- Product Section2 -->
-			<div class="product-section product-section1 product-section2 container-fluid no-padding">
-				<!-- Container -->
-				<div class="container">
-					<div class="row">
-						<!-- Widget Area -->
-						<div class="col-md-4 col-sm-4 col-xs-12 widget-area no-right-padding">
-							<!-- Widget Search -->
-							<aside class="widget widget_search">
-								<h3 class="widget-title">Search</h3>
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search You Wants. . .">
-									<span class="input-group-btn">
-										<button class="btn btn-search" title="Search" type="button"><i class="icon icon-Search"></i></button>
-									</span>
-								</div>
-							</aside><!-- Widget Search /- -->
-							<!-- Widget Categories -->
-							<aside class="widget widget_categories">
-								<h3 class="widget-title">Categories</h3>
-								<ul>
-									<li><a href="#" title="Beautiful Chairs">Beautiful Chairs <span>(5)</span></a></li>
-									<li><a href="#" title="Creative Designs">Creative Designs <span>(6)</span></a></li>
-									<li><a href="#" title="Trendy Products">Trendy Products <span>(4)</span></a></li>
-									<li><a href="#" title="Interior Products">Interior Products <span>(2)</span></a></li>
-									<li><a href="#" title="Popular Products">Popular Products <span>(8)</span></a></li>
-									<li><a href="#" title="Casual Shirts">Casual Shirts <span>(7)</span></a></li>
-								</ul>
-							</aside><!-- Widget Categories /-  -->
-							<!-- Widget Price -->
-							<aside class="widget widget_price_filter">
-								<h3 class="widget-title">filter by price</h3>
-								<div class="price-filter">
-									<div id="slider-range"></div>
-									<div class="price-input">									
-										<span id="amount"></span>
-										<span id="amount2"></span>
-									</div>
-									<a href="#" title="filter">Filter</a>
-								</div>
-							</aside><!-- Widget Price /- -->
-							<!-- Widget Latest Post -->
-							<aside class="widget widget_latest_post">
-								<h3 class="widget-title">recent posts</h3>
-								<div class="latest-box">
-									<div class="post-box">
-										<a href="#"><img src="{% static 'images/latest-post-1.jpg' %}" alt="Post"></a>
-										<h5><a href="#" title="need max shop.">I Phone 6s sales on</a></h5>
-										<div class="star-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<span class="price"><del>$955</del>$789</span>
-									</div>
-								</div>
-								<div class="latest-box">
-									<div class="post-box">
-										<a href="#"><img src="{% static 'images/latest-post-2.jpg' %}" alt="Post"></a>
-										<h5><a href="#" title="need max shop.">mens casual footwear</a></h5>
-										<div class="star-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<span class="price"><del>$185</del>$120</span>
-									</div>
-								</div>
-								<div class="latest-box">
-									<div class="post-box">
-										<a href="#"><img src="{% static 'images/latest-post-3.jpg' %}" alt="Post"></a>
-										<h5><a href="#" title="need max shop.">running shoes</a></h5>
-										<div class="star-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<span class="price"><del>$150</del>$85</span>
-									</div>
-								</div>
-							</aside><!-- Widget Latest Post /- -->
-							<!-- Widget Tags -->
-							<aside class="widget widget_tags">
-								<h3 class="widget-title">popular tags</h3>
-								<div class="tags-box">
-									<a href="#" title="Chairs">Chairs</a>
-									<a href="#" title="Modern Designs">Modern Designs</a>
-									<a href="#" title="Watches">Watches</a>
-									<a href="#" title="Future">Future</a>
-									<a href="#" title="Popular Products">Popular Products</a>
-									<a href="#" title="Trendy">Trendy</a>
-									<a href="#" title="Interier">Interier</a>
-									<a href="#" title="Modern">Modern</a>
-								</div>
-							</aside><!-- Widget Tags -->
-						</div><!-- Widget Area /- -->
-						
-						<!-- Content Area -->
-						<div class="col-md-8 col-sm-7 col-xs-12 content-area product-section2 no-left-padding">
-							<!-- Products -->
-							<ul class="products">
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-10.jpg' %}" alt="Product" />
-										<h5>Stylish Chair</h5>
-										<span class="price"><del>$200</del>$139</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-									
-								</li><!-- Product /- -->
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-11.jpg' %}" alt="Product" />
-										<h5>men's casual shoes</h5>
-										<span class="price"><del>$200</del>$119</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</li><!-- Product /- -->
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-12.jpg' %}" alt="Product" />
-										<h5>sun glass</h5>
-										<span class="price"><del>$150</del>$85</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</li><!-- Product /- -->
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-13.jpg' %}" alt="Product" />
-										<h5>Stylish Chair</h5>
-										<span class="price"><del>$380</del>$259</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</li><!-- Product /- -->
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-14.jpg' %}" alt="Product" />
-										<h5>latest headphone</h5>
-										<span class="price"><del>$900</del>$759</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</li><!-- Product /- -->
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-15.jpg' %}" alt="Product" />
-										<h5>men's jackets</h5>
-										<span class="price"><del>$350</del>$249</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</li><!-- Product /- -->
-								<!-- Product -->
-								<li class="product">
-									<a href="#">
-										<img src="{% static 'images/product-16.jpg' %}" alt="Product" />
-										<h5>Model x12 computer</h5>
-										<span class="price"><del>$255</del>$139</span>
-									</a>
-									<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-									<div class="wishlist-box">
-										<a href="#"><i class="fa fa-arrows-alt"></i></a>
-										<a href="#"><i class="fa fa-heart-o"></i></a>
-										<a href="#"><i class="fa fa-search"></i></a>
-									</div>
-								</li><!-- Product /- -->
-								<!-- Product -->
-							<li class="product">
-								<a href="#">
-									<img src="{% static 'images/product-17.jpg' %}" alt="Product" />
-									<h5>Stylish headset</h5>
-									<span class="price"><del>$85</del>$39</span>
+
+			<div class="clear"></div>
+
+
+
+			<ul class="products">
+
+				<div id="posts_cont">
+
+				{% for item in items %}
+
+					<li  class="{% cycle 'home_small_box' 'home_small_box' 'home_small_box home_small_box_last' %}">
+						<a href="http://127.0.0.1/shop/catalog/{{ item.id }}" class="woocommerce-LoopProduct-link">		
+							<div>
+								<a href="http://127.0.0.1/shop/catalog/{{ item.id }}">
+									<img width="360" height="360" src="{{ item.img1.url }}" class="attachment-home-small-box size-home-small-box wp-post-image" alt=""  />
 								</a>
-								<a href="#" class="add-to-cart1" title="Add To Cart">Add To Cart</a>
-								<div class="wishlist-box">
-									<a href="#"><i class="fa fa-arrows-alt"></i></a>
-									<a href="#"><i class="fa fa-heart-o"></i></a>
-									<a href="#"><i class="fa fa-search"></i></a>
-								</div>
-							</li><!-- Product /- -->
-							</ul><!-- Products /- -->
-						</div><!-- Content Area /- -->
-					</div><!-- Row /- -->
-					<nav class="ow-pagination">
-						<ul class="pager">
-							<li class="number"><a href="#">4</a></li>
-							<li class="load-more"><a href="#">Load More</a></li>
-							<li class="previous"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-							<li class="next"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-						</ul>
-					</nav>
-				</div><!-- Container /- -->
-			</div><!-- Product Section2 /- -->
-		</main>
-		
-		<!-- Footer Main 1 -->
-		<footer id="footer-main" class="footer-main footer-main-1 services-section container-fluid">
-			<!-- Container -->
-			<div class="container">
-				<div class="services-item">
-					<div class="col-md-4 col-sm-6 col-xs-6">
-						<div class="srv-box">
-							<i class="icon icon-Truck"></i><h5>Free delivery</h5><i class="icon icon-Dollar"></i>
-							<span class="icon_close"></span>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6">
-						<div class="srv-box">
-							<i class="icon icon-Goto"></i><h5>Money Back</h5><i class="icon icon-Dollars"></i>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-6 col-xs-6">
-						<div class="srv-box">
-							<i class="icon icon-Headset"></i><h5>24/7 support</h5><i class="icon icon-Timer"></i>
-						</div>
-					</div>
-				</div>
-				<!-- Widget About -->
-				<aside class="col-md-3 col-sm-6 col-xs-6 ftr-widget widget_about">
-					<a href="index.html" title="Max Shop">Max <span>Shop</span></a>
-					<p>On the most sensational inspirational celbrational Muppetational... This is what we call Show. I have always wanted to have a neighbor just like you.</p>
-					<ul class="social">
-						<li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#" title="Tumblr"><i class="fa fa-tumblr"></i></a></li>
-						<li><a href="#" title="Vimeo"><i class="fa fa-vimeo"></i></a></li>
-					</ul>
-				</aside><!-- Widget About /- -->
-				<!-- Widget Links -->
-				<aside class="col-md-2 col-sm-6 col-xs-6 ftr-widget widget_links">
-					<h3 class="widget-title">Popular Links</h3>
-					<ul>
-						<li><a href="index.html#product-section" title="Popular Products">Popular Products</a></li>
-						<li><a href="index.html#selling" title="Best Selling">Best Selling</a></li>
-						<li><a href="about.html" title="About Us">About Us</a></li>
-						<li><a href="index.html#dealing" title="Deal Of The Day">Deal Of The Day</a></li>
-						<li><a href="index.html#collection" title="Product Collections">Product Collections</a></li>
-						<li><a href="contact-us.html" title="Contact Us">Contact Us</a></li>
-					</ul>
-				</aside><!-- Widget Links /- -->
-				<!-- Widget Account -->
-				<aside class="col-md-3 col-sm-6 col-xs-6 ftr-widget widget_links widget_account">
-					<h3 class="widget-title">my account</h3>
-					<ul>
-						<li><a href="#" title="My Order Details">My Order Details</a></li>
-						<li><a href="#" title="My credit Offers">My credit Offers</a></li>
-						<li><a href="#" title="My addresses">My addresses</a></li>
-						<li><a href="#" title="My Personal Details">My Personal Details</a></li>
-						<li><a href="#" title="My Account Details">My Account Details</a></li>
-					</ul>
-				</aside><!-- Widget Account /- -->
-				<!-- Widget Gallery -->
-				<aside class="col-md-4 col-sm-6 col-xs-6 ftr-widget widget_gallery">
-					<h3 class="widget-title">collections</h3>
-					<ul>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-1.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-2.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-3.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-4.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-5.jpg' %}" alt="ftr-latestpost"></a></li>
-						<li><a href="#" title=""><img src="{% static 'images/ftr-latestpost-6.jpg' %}" alt="ftr-latestpost"></a></li>
-					</ul>
-				</aside><!-- Widget Gallery -->
-				<div class="copyright-section">
-					<div class="coyright-content">
-						<p>&copy; Max shop. all rights reserved</p>
-					</div>	
-					<ul>
-						<li><a href="#" title="Delivery Information">Delivery Information</a></li>
-						<li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
-						<li><a href="#" title="Terms & Condition">Terms & Condition</a></li>
-					</ul>
-				</div>
-			</div><!-- Container /- -->
-		</footer><!-- Footer Main 1 -->
+							</div>
+							<div class="sb_title">
+								<a href="http://127.0.0.1/shop/catalog/{{ item.id }}">{{ item.title }}</a>
+							</div>
+			
+							<!-- <div class="sb_price">
+			
+								<span class="price">
+									<span class="woocommerce-Price-amount amount">
+										<span class="woocommerce-Price-currencySymbol">&#36;</span>{{ item.price }}
+									</span>
+								</span>
+							</div> -->
+							<div class="prod_meta">
+						<div class="prod_meta_button">
+							<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
 
+											
+								<a rel="nofollow" data-quantity="1" data-product_id="{{ item.id }}" data-product_sku="Relax599" class="button product_type_simple add_to_cart_button ajax_add_to_cart{% if item.id in list_of_added_items %} added{% endif %}">В корзину</a>
+								<a href="#" class="added_to_cart" title="View cart"{% if item.id not in list_of_added_items %} style="display: none;"{% endif %}>View cart</a>
+							</p>			
+						</div> <!-- //prod_meta_button -->
+						<div class="sb_price" style="text-align: right">
+							<span class="price">
+							{% if item.get_discount_price == item.price %}
+								<span class="woocommerce-Price-amount amount">{{ item.price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+							{% else %}
+								<del>
+									<span class="woocommerce-Price-amount amount">
+										{{ item.price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+								</del>
+								<ins>
+									<span class="woocommerce-Price-amount amount">{{ item.get_discount_price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+								</ins>
+							{% endif %}
+							</span>
+
+						</div>
+						<!--<div class="prod_meta_link">
+							<a href="http://dessign.net/shopper-woocommerce-theme/product/design-and-relax/">LEARN MORE</a>
+						</div>-->
+					</div> <!-- //prod_meta -->
+						</a>
+
+						<!-- <a rel="nofollow" href="/shopper-woocommerce-theme/product-category/all-product/?add-to-cart=85" data-quantity="1" data-product_id="85" data-product_sku="Relax599" class="button product_type_simple add_to_cart_button ajax_add_to_cart" style="display: inline;">Add to cart</a> -->
+					</li>	
+				{% endfor %}					
+					<div class="clear"></div>
+				</div><!--//posts_cont-->
+
+			</ul>
+
+			
+
+			<div class="load_more_cont">
+				<div align="center">
+					<div class="load_more_text">
+						<a href="#" data-url="{% url 'get_more_catalog_items' %}">ЗАГРУЗИТЬ ЕЩЕ</a>
+					</div>
+				</div>
+
+			</div>
+			<div class="clear"></div>
+
+		</div>
 	</div>
-	
-	<!-- JQuery v1.12.4 -->
-	<script src="{% static 'js/jquery.min.js' %}"></script>
 
-	<!-- Library - Js -->
-	<script src="{% static 'libraries/lib.js' %}"></script>
-	
-	<script src="{% static 'libraries/jquery.countdown.min.js' %}"></script>
-	
-	<!-- RS5.0 Core JS Files -->
-	<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.tools.min.js?rev=5.0' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.revolution.min.js?rev=5.0' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
-	
-	<!-- Library - Google Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW40y4kdsjsz714OVTvrw7woVCpD8EbLE"></script>
 
-	<!-- Library - Theme JS -->
-	<script src="{% static 'js/functions.js' %}"></script>
-	
-</body>
-</html>
-	
+	<div id="sidebar">
+		
+		<div class="side_box">		
+			<h3 class="side_title">Recent Posts</h3>		
+			<ul>
+				<li>
+					<a href="http://dessign.net/shopper-woocommerce-theme/shopper-woocommerce-wordpress-theme-will-help-you-sell/">Shopper Woocommerce wordpress theme will help you sell</a>
+				</li>
+				<li>
+					<a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/">With This Free Shopper Theme we can Sell Product</a>
+				</li>
+				<li>
+					<a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/">New Product Will Sell If Your Product is Amazing</a>
+				</li>
+				<li>
+					<a href="http://dessign.net/shopper-woocommerce-theme/this-is-blog-post-here/">Creative Blog Post To Sell Your Product</a>
+				</li>
+				<li>
+					<a href="http://dessign.net/shopper-woocommerce-theme/hello-world/">Hello world!</a>
+				</li>
+			</ul>
+		</div>		
+		<div class="side_box">
+			<h3 class="side_title">Woocommerce Plugin</h3>			
+			<div class="textwidget">Front matter, or preliminaries, is the first section of a book, and is usually the smallest section in terms of the number of pages. Incorporating the content,style,format,design, and sequence of the various components of a book into a coherent whole.</div>
+		</div>
+		<div class="side_box">
+			<h3 class="side_title">Archives</h3>		
+			<ul>
+				<li><a href='http://dessign.net/shopper-woocommerce-theme/2015/03/'>March 2015</a></li>
+			</ul>
+		</div>			
+	</div><!--//sidebar-->
+</div>
+<a id="a_for_ajax_adding_cart" data-url="{% url 'cart_adding' %}" ></a>
+﻿{% endblock %}
+
+
+{% block script %}
+<!-- <script type="application/ld+json">{"@context":"http:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":"1","item":{"name":"Home","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme"}},{"@type":"ListItem","position":"2","item":{"name":"All Product"}}]}</script><script type='text/javascript'>
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/product-category\/all-product\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"http:\/\/dessign.net\/shopper-woocommerce-theme\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script> -->
+<!-- <script type='text/javascript' src='{% static 'js/add-to-cart.min.js' %}'></script> -->
+<script src="{% static 'js/my_adding.js' %}"></script>
+<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>
+<script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/product-category\/all-product\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script> -->
+<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/product-category\/all-product\/?wc-ajax=%%endpoint%%","fragment_name":"wc_fragments"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.0.3'></script>
+<script type='text/javascript' src='http://dessign.net/shopper-woocommerce-theme/wp-includes/js/wp-embed.min.js?ver=4.8.2'></script>
+<script src="{% static 'js/scripts.js' %}"></script> -->
+<form id="csrf-form" name="csrfmiddlewaretoken">{% csrf_token %}</form>
+<script type="text/javascript">
+$(document).ready(
+function($){
+	$('.load_more_text a').click(function() {
+		$(this).css('visibility','hidden');
+		var url = $(this).data('url');
+		var item_id = $(this).parent().parent().parent().parent().find('a.add_to_cart_button').last().data('product_id');
+		console.log(item_id)
+		console.log(url)
+
+		var data = {};
+		data.last_id = item_id;
+		console.log('last id :')
+		console.log(data['last_id'])
+		var csrf_token = $('#csrf-form [name="csrfmiddlewaretoken"]').val();
+		data["csrfmiddlewaretoken"] = csrf_token;
+		data.category_name = $('.archive_header_left h1').first().html();
+
+		$.ajax({
+				url: url,
+				type: 'POST',
+				data: data,
+				cache: true,
+				success: function (data) {
+					console.log("OK");
+					console.log(data)
+					$.each(data.item, function(k, v){
+
+						console.log('index:')
+						console.log(k)
+						console.log('prepre')
+						var index_class = ''
+						var end_div = ''
+						var span_price = ''
+						var if_it_added_class = ''
+						var if_it_added_style = ' style="display: none;"'
+
+						if ( data.items_added.indexOf(v.item_id) != -1 ) {
+							if_it_added_class = ' added';
+							if_it_added_style = '';
+						}
+						if ( k == 2 || k == 5 || k == 8 ){
+							index_class = 'home_small_box home_small_box_last'
+							end_div = '<div class="home_small_box clear"></div>'
+						} else {
+							index_class = 'home_small_box'
+							end_div = ''
+						};
+
+						
+						if (v.discount_price != v.price) {
+							console.log(v.discount_price, v.price)
+							span_price = '<del><span class="woocommerce-Price-amount amount">' + v.price + '<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>	</del>	<ins><span class="woocommerce-Price-amount amount">' + v.discount_price + '<span class="woocommerce-Price-currencySymbol">&#8381;</span></span></ins>'
+						} else {
+							console.log('ELSE')
+							span_price = '<span class="woocommerce-Price-amount amount">' + v.price + '<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>'
+						}
+
+
+						// console.log('pre')
+
+						var item_div = '\
+								<div  class="' + index_class + '">\
+	\
+								<a href="' + v.item_url + '" class="woocommerce-LoopProduct-link">\
+\
+								<div>\
+								<a href="' + v.item_url + '">\
+									<img width="360" height="360" src="' + v.img_url + '" class="attachment-home-small-box size-home-small-box wp-post-image" alt=""  sizes="(max-width: 360px) 100vw, 360px"></a>		\
+								</div>\
+									<div class="sb_title">\
+										<a href="' + v.item_url + '">' + v.title + '</a>\
+									</div>\
+									\
+									<div class="prod_meta">\
+										<div class="prod_meta_button">\
+											<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">\
+				\
+															\
+												<a rel="nofollow" data-product_id="' + v.item_id + '" class="button product_type_simple add_to_cart_button ajax_add_to_cart' + if_it_added_class + '">В корзину</a>\
+												<a href="#" class="added_to_cart" title="View cart"' + if_it_added_style + '>View cart</a>\
+											</p>			\
+										</div> <!-- //prod_meta_button -->\
+										<div class="sb_price" style="text-align: right">\
+											<span class="price">\
+											' + span_price + '\
+											</span>\
+				\
+										</div>\
+									</div> <!-- //prod_meta -->\
+								</a>\
+							</div>' + end_div;
+
+						$('#posts_cont').append(item_div);
+
+					});
+					if (data.is_it_end == false) {
+						$('.load_more_text a').css('visibility','visible');
+					}
+				},
+				error: function(){
+					console.log("error");
+				}
+			});
+
+		return false;
+	});
+});
+</script>	
+{% endblock %}
+
+
+
+
+

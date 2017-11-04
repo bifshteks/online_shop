@@ -5,7 +5,7 @@ from django.shortcuts import render
 from blog.models import Posts
 
 def posts(request):
-	posts = Posts.objects.all()
+	posts = Posts.objects.all().order_by('-id')[:5]
 	# range_slice = int(page) * 10
 	# returned_posts = posts[range_slice-10 : range_slice]
 	context = {

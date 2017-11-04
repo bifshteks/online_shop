@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+	<title>Creative Pillow Design &laquo;  Shopper WooCommerce eCommerce WordPress Theme</title> 
+
+{% block link %}
+<link rel='stylesheet' id='photoswipe-css'  href='{% static "css/photoswipe.css" %}' type='text/css' media='all' />
+<link rel='stylesheet' id='photoswipe-default-skin-css'  href='{% static "css/default-skin.css" %}' type='text/css' media='all' />
+{% endblock %}
+
+
+
+
+
+	
+	
+
+{% block body_class %}product-template-default single single-product postid-83 woocommerce woocommerce-page{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="container">
+	<div id="container">
+		<div id="content" role="main">
+			<!-- <nav class="woocommerce-breadcrumb">
+				<a href="http://dessign.net/shopper-woocommerce-theme">Home</a>&nbsp;&#47;&nbsp;<a href="http://dessign.net/shopper-woocommerce-theme/product-category/accessories/">Accessories</a>&nbsp;&#47;&nbsp;Creative Pillow Design
+			</nav> -->
+			{% if item.id in list_of_added_items %}
+			<div class="woocommerce-message"><a href="{% url 'cart' %}" class="button wc-forward">Корзина</a> Товар “{{ item.title }}” был добавлен в корзину.</div>
+			{% endif %}
+
+			<div id="product-83" class="post-83 product type-product status-publish has-post-thumbnail product_cat-accessories product_cat-all-product product_cat-clearance first instock sale virtual shipping-taxable purchasable product-type-simple">
+
+				<span class="onsale">Sale!</span>
+					<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 0; transition: opacity .25s ease-in-out;">
+						<figure class="woocommerce-product-gallery__wrapper">
+							<div data-thumb="{{ item.img1.url }}" class="woocommerce-product-gallery__image">
+								<a href="{{ item.img1.url }}">
+									<img width="560" height="555" src="{{ item.img1.url }}" class="attachment-shop_single size-shop_single wp-post-image" alt="" title="" data-src="{{ item.img1.url }}" data-large_image="{{ item.img1.url }}" data-large_image_width="560" data-large_image_height="555"  sizes="(max-width: 560px) 100vw, 560px" />
+								</a>
+							</div>
+						</figure>
+					</div>
+
+					<div class="summary entry-summary">
+
+						<h1 class="product_title entry-title">{{ item.title }}</h1>
+						<p class="price">
+							{% if item.get_discount_price == item.price %}
+								<span class="woocommerce-Price-amount amount">{{ item.price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+							{% else %}
+								<del>
+									<span class="woocommerce-Price-amount amount">
+										{{ item.price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+								</del>
+								<ins>
+									<span class="woocommerce-Price-amount amount">{{ item.get_discount_price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+								</ins>
+							{% endif %}
+						</p>
+						<div class="woocommerce-product-details__short-description">
+							<p>{{ item.description }}</p>
+						</div>
+
+	
+						<form class="cart" >
+							<div class="quantity">
+								<input type="number" id="amount_input" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
+							</div>
+						
+							<button id="button_add_to_cart" type="submit" name="add-to-cart" class="single_add_to_cart_button button alt" data-product_id="{{ item.id }}" data-is_added="{% if item.id in list_of_added_items %}added{% else %}not{% endif %}">Добавить в корзину</button>
+
+						</form>
+
+	
+						<!-- <div class="product_meta">
+
+	
+	
+							<span class="sku_wrapper">SKU: <span class="sku">Pillow</span></span>
+
+	
+							<span class="posted_in">Categories: <a href="http://dessign.net/shopper-woocommerce-theme/product-category/accessories/" rel="tag">Accessories</a>, <a href="http://dessign.net/shopper-woocommerce-theme/product-category/all-product/" rel="tag">All Product</a>, <a href="http://dessign.net/shopper-woocommerce-theme/product-category/clearance/" rel="tag">Clearance</a></span>
+	
+	
+						</div> -->
+
+
+					</div><!-- .summary -->
+			</div>		
+		</div> <!--//sidebar-->
+
+	</div>
+	<div class="clear"></div>
+</div>
+{% endblock %}
+﻿
+
+
+
+{% block script %}
+<a id="a_for_ajax_adding_cart" data-url="{% url 'cart_adding' %}" data-cart_url="{% url 'cart' %}" data-item_title="{{ item.title }}"></a>
+<form id="csrf-form" name="csrfmiddlewaretoken">{% csrf_token %}</form>
+
+
+<script type="application/ld+json">{"@graph":[{"@context":"http:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":"1","item":{"name":"Home","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme"}},{"@type":"ListItem","position":"2","item":{"name":"Accessories","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme\/product-category\/accessories\/"}},{"@type":"ListItem","position":"3","item":{"name":"Creative Pillow Design"}}]},{"@context":"http:\/\/schema.org\/","@type":"Product","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme\/product\/creative-pillow-design\/","url":"http:\/\/dessign.net\/shopper-woocommerce-theme\/product\/creative-pillow-design\/","name":"Creative Pillow Design","offers":[{"@type":"Offer","priceCurrency":"USD","availability":"http:\/\/schema.org\/InStock","sku":"Pillow","image":"http:\/\/dessign.net\/shopper-woocommerce-theme\/wp-content\/uploads\/2015\/03\/pillow1.jpg","description":"Find work that truly matters to you and your life will change. Forget about your traditional recruitment and searching for job. Do what you love. You need to start now, because your dream will follow your passion for art and design. We are small group of passionate designers and architects\u2026Find work that truly matters to you and your life will change. Forget about your traditional recruitment and searching for job. Do what you love. You need to start now, because your dream will follow your passion for art and design. We are small group of passionate designers and architects","seller":{"@type":"Organization","name":"Shopper WooCommerce eCommerce WordPress Theme","url":"http:\/\/dessign.net\/shopper-woocommerce-theme"},"price":"29.00"}]}]}</script>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+	<!-- Background of PhotoSwipe. It's a separate element as animating opacity is faster than rgba(). -->
+	<div class="pswp__bg"></div>
+
+	<!-- Slides wrapper with overflow:hidden. -->
+	<div class="pswp__scroll-wrap">
+
+		<!-- Container that holds slides.
+		PhotoSwipe keeps only 3 of them in the DOM to save memory.
+		Don't modify these 3 pswp__item elements, data is added later on. -->
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+
+		<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+		<div class="pswp__ui pswp__ui--hidden">
+
+			<div class="pswp__top-bar">
+
+				<!--  Controls are self-explanatory. Order can be changed. -->
+
+				<div class="pswp__counter"></div>
+
+				<button class="pswp__button pswp__button--close" aria-label="Close (Esc)"></button>
+
+				<button class="pswp__button pswp__button--share" aria-label="Share"></button>
+
+				<button class="pswp__button pswp__button--fs" aria-label="Toggle fullscreen"></button>
+
+				<button class="pswp__button pswp__button--zoom" aria-label="Zoom in/out"></button>
+
+				<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+				<!-- element will get class pswp__preloader--active when preloader is running -->
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+						<div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div>
+			</div>
+
+			<button class="pswp__button pswp__button--arrow--left" aria-label="Previous (arrow left)"></button>
+
+			<button class="pswp__button pswp__button--arrow--right" aria-label="Next (arrow right)"></button>
+
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<!-- <script type='text/javascript' src='{% static 'js/add-to-cart.min.js' %}'></script> -->
+<script type='text/javascript' src='{% static 'js/jquery.zoom.min.js' %}'></script>
+<script type='text/javascript' src='{% static 'js/jquery.flexslider.min.js' %}'></script>
+
+<script type='text/javascript' src='{% static 'js/photoswipe.min.js' %}'></script>
+
+<script type='text/javascript' src='{% static 'js/photoswipe-ui-default.min.js' %}'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wc_single_product_params = {"i18n_required_rating_text":"Please select a rating","review_rating_required":"yes","flexslider":{"rtl":false,"animation":"slide","smoothHeight":false,"directionNav":false,"controlNav":"thumbnails","slideshow":false,"animationSpeed":500,"animationLoop":false},"zoom_enabled":"1","photoswipe_enabled":"1","flexslider_enabled":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='{% static 'js/single-product.min.js' %}'></script>
+
+<script>
+	$(document).ready(
+function($){
+	$('form').submit(function(e){
+		e.preventDefault();
+	});
+
+	$('#button_add_to_cart').click(function() {
+		if ($(this).data('is_added') == 'not'){
+			var url = $('#a_for_ajax_adding_cart').data('url');
+			var cart_url = $('#a_for_ajax_adding_cart').data('cart_url');
+			var item_title = $('#a_for_ajax_adding_cart').data('item_title');
+			var item_id = $(this).data('product_id');
+			var amount = $('#amount_input').val()
+
+
+			var data = {};
+			data.item_id = item_id;
+
+			var csrf_token = $('#csrf-form [name="csrfmiddlewaretoken"]').val();
+			data["csrfmiddlewaretoken"] = csrf_token;
+			data.amount = amount;
+
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: data,
+				cache: true,
+				success: function () {
+					$('#content').prepend('<div class="woocommerce-message"><a href="' + cart_url + '" class="button wc-forward">Корзина</a> Товар “' + item_title + '” был добавлен в корзину.</div>');
+					console.log('OK')
+				},
+				error: function(){
+					console.log("error");
+				}
+			});
+
+			return false;
+		};
+	});
+});
+
+</script>
+
+
+{% endblock %}

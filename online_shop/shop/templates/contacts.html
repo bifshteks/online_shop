@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Связаться с нами{% endblock %}
+{% block body_class %}page-template-default page page-id-10{% endblock %}
+
+
+{% block content %}
+<section id="content">
+	<div class="container">
+	
+		<div class="single_left">
+			<div class="single_post_cont">
+			
+							
+				
+					
+					<div class="single_inside_content">
+					
+						<p>Use Free Plugin “<a href="https://wordpress.org/plugins/clean-and-simple-contact-form-by-meg-nicholas/" target="_blank">Contact Form Clean and Simple</a>”</p>
+<div id="cscf" class="cscfBlock">	
+	<div class="cscfMessageSent" style="display:none;">
+		<h3>Message Sent</h3>
+		<p>Thank you for your message, we will be in touch very shortly. </p>	
+	</div>
+	<div class="cscfMessageNotSent" style="display:none;">
+		<p>Sorry, there has been a problem and your message was not sent.</p>	
+	</div>
+	<div class="cscfForm">
+		<p>Please enter your contact details and a short message below and I will try to answer your query as soon as possible.</p>
+		<form role="form" id="frmCSCF" name="frmCSCF" method="post">
+			<input type="hidden" id="cscf_nonce" name="cscf_nonce" value="e3fb253368" />
+			<input type="hidden" name="_wp_http_referer" value="/shopper-woocommerce-theme/contact/" />
+			<input type="hidden" name="post-id" value="10">						<!-- name -->			
+			<div class="control-group form-group">
+				<label for="cscf_name">Имя:</label>
+				<div class="">
+					<input class="form-control input-xlarge" data-rule-required="true" data-msg-required="Пожалуйста, напишите свое имя." type="text" id="cscf_name" name="cscf[name]" value="" placeholder="Ваше Имя"/>
+				</div>
+				<span for="cscf_name" class="help-inline help-block error" style="display:none;"></span>			
+			</div>			<!--email address-->			
+			<div class="control-group form-group">				
+				<label for="cscf_email">Email адрес:</label>				
+				<div class="">										
+					<input class="form-control input-xlarge" data-rule-required="true" data-rule-email="true" data-msg-required="Пожалуйста, введите корректный e-mail адрес." data-msg-email="Пожалуйста, введите корректный e-mail адрес." type="email" id="cscf_email" name="cscf[email]" value="" placeholder="Ваш Email Адрес"/>				
+				</div>                
+				<span for="cscf_email" class="help-inline help-block error" style="display:none;"></span>			
+			</div>							<!--confirm email address -->				
+			<!-- <div class="control-group form-group">					
+				<label for="cscf_confirm-email">Confirm Email Address:</label>					
+				<div class="">												
+					<input class="form-control input-xlarge" data-rule-required="true" data-rule-email="true" data-rule-equalTo="#cscf_email" data-msg-required="Please enter the same email address again." data-msg-email="Please enter a valid email address." data-msg-equalTo="Please enter the same email address again." type="email" id="cscf_confirm-email" name="cscf[confirm-email]"	 value="" placeholder="Confirm Your Email Address"/>					
+				</div>                
+				<span for="cscf_confirm-email" class="help-inline help-block error" style="display:none;"></span>				
+			</div>		 -->				<!-- message -->			
+			<div class="control-group form-group">				
+				<label for="cscf_message">Сообщение:</label>				
+				<div class="">										
+					<textarea class="form-control input-xlarge" data-rule-required="true" data-msg-required="Пожалуйста, напишите сообщение." id="cscf_message" name="cscf[message]" rows="10" placeholder="Ваше Сообщение"></textarea>				
+				</div>					
+				<span for="cscf_message" class="help-inline help-block error" style="display:none;"></span>			
+			</div>						<!-- recaptcha -->						
+			<input type="submit" id="cscf_SubmitButton" class="btn btn-default" value="Send Message"/>
+		</form>
+	</div>
+</div>
+						
+					</div><!--//single_inside_content-->
+					
+					<br /><br />
+					
+															
+					
+					<!--<div class="next_prev_cont">
+						<div class="left">
+							 <a href="http://dessign.net/shopper-woocommerce-theme/about/" rel="prev"><i>Previous post</i><br />About</a> 
+						</div>
+						<div class="right">
+							 <a href="http://dessign.net/shopper-woocommerce-theme/blog/" rel="next"><i>Next post</i><br />Blog</a> 
+						</div>
+						<div class="clear"></div>
+					</div>--><!--//next_prev_cont-->							
+					
+				            					
+			
+			</div><!--//single_post_cont-->
+		
+		</div><!--//single_left-->
+		
+			<!-- 	<div id="sidebar">
+		
+					<div class="side_box">		<h3 class="side_title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://dessign.net/shopper-woocommerce-theme/shopper-woocommerce-wordpress-theme-will-help-you-sell/">Shopper Woocommerce wordpress theme will help you sell</a>
+						</li>
+					<li>
+				<a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/">With This Free Shopper Theme we can Sell Product</a>
+						</li>
+					<li>
+				<a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/">New Product Will Sell If Your Product is Amazing</a>
+						</li>
+					<li>
+				<a href="http://dessign.net/shopper-woocommerce-theme/this-is-blog-post-here/">Creative Blog Post To Sell Your Product</a>
+						</li>
+					<li>
+				<a href="http://dessign.net/shopper-woocommerce-theme/hello-world/">Hello world!</a>
+						</li>
+				</ul>
+		</div>		<div class="side_box"><h3 class="side_title">Woocommerce Plugin</h3>			<div class="textwidget">Front matter, or preliminaries, is the first section of a book, and is usually the smallest section in terms of the number of pages. Incorporating the content,style,format,design, and sequence of the various components of a book into a coherent whole.</div>
+		</div><div class="side_box"><h3 class="side_title">Archives</h3>		<ul>
+			<li><a href='http://dessign.net/shopper-woocommerce-theme/2015/03/'>March 2015</a></li>
+		</ul>
+		</div>			
+		</div> --><!--//sidebar-->		
+		<div class="clear"></div>
+		
+	</div><!--//container-->
+</section><!--//content-->
+{% endblock %}
+
+﻿{% block script %}
+<link rel='stylesheet' id='cscf-bootstrap-css'  href='http://dessign.net/shopper-woocommerce-theme/wp-content/plugins/clean-and-simple-contact-form-by-meg-nicholas/css/bootstrap-forms.min.css?ver=4.6.1' type='text/css' media='all' />
+
+<script type='text/javascript' src='{% static 'js/add-to-cart.min.js' %}'></script>
+<script src="{% static 'js/my_adding.js' %}"></script>
+
+<script type='text/javascript' src='{% static 'js/jquery.validate.min.js' %}'></script>
+
+<script type='text/javascript' src='{% static 'js/jquery.validate.contact.form.js' %}'></script>
+
+{% endblock %}
+
+		
