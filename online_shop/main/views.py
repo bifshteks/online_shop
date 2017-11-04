@@ -21,7 +21,7 @@ class Index(TemplateView):
 			session_key = self.request.session.cycle_key()
 
 		id_already_added_items = []
-		all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key)]
+		all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key, is_active=True)]
 		for item in items:
 			if item in all_user_ordered:
 				id_already_added_items.append(int(item.id))

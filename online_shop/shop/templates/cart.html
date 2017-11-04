@@ -16,6 +16,8 @@
 						<form class="woocommerce-cart-form" action="http://dessign.net/shopper-woocommerce-theme/cart/" method="post">
 	
 							<table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+								{% for item in items %}
+								{% if forloop.first %}
 								<thead>
 									<tr>
 										<th class="product-remove">&nbsp;</th>
@@ -27,11 +29,11 @@
 									</tr>
 								</thead>
 								<tbody>
-								{% for item in items %}
+								{% endif %}
 								<tr class="woocommerce-cart-form__cart-item cart_item">
 
 									<td class="product-remove">
-										<a href="#" class="remove" aria-label="Remove this item" data-product_id="{{ item.id }}">&times;</a>
+										<a style="cursor: pointer;" class="remove" aria-label="Remove this item" data-product_id="{{ item.item.id }}">&times;</a>
 									</td>
 
 									<td class="product-thumbnail">
@@ -39,7 +41,7 @@
 									</td>
 
 									<td class="product-name" data-title="Product">
-										<a href="{% url 'catalog_default' %}{{ item.id }}">Creative Pillow Design</a>
+										<a href="{% url 'catalog_default' %}{{ item.id }}">{{ item.item.title }}</a>
 									</td>
 
 									<td class="product-price" data-title="Price">
@@ -48,7 +50,7 @@
 
 									<td class="product-quantity" data-title="Quantity">
 										<div class="quantity">
-											<input type="number" class="input-text qty text" step="1" min="0" max="" name="cart[fe9fc289c3ff0af142b6d3bead98a923][qty]" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
+											<input type="number" class="input-text qty text" step="1" min="0" name="" value="{{ item.amount }}" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
 										</div>
 									</td>
 
@@ -56,6 +58,18 @@
 										<span class="woocommerce-Price-amount amount">{{ item.total_price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>						
 									</td>
 								</tr>
+								{% empty %}
+								<tbody>
+								<tr>
+									<td class="product-remove"></td>
+									<td colspan="5" class="product-thumbnail">Ваша корзина пуста</td>
+									<td class="product-name"></td>
+									<td class="product-price"></td>
+									<td class="product-quantity"></td>
+									<td class="product-subtotal"></td>
+								</tr>
+
+
 								{% endfor %}
 <!-- 								<tr class="woocommerce-cart-form__cart-item cart_item">
 
@@ -82,35 +96,35 @@
 					</tr> -->
 					
 			
-			<tr>
+			<!-- <tr>
 				<td colspan="6" class="actions">
 
-											<!-- div class="coupon">
+											div class="coupon">
 							<label for="coupon_code">Coupon:</label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code" /> <input type="submit" class="button" name="apply_coupon" value="Apply coupon" />
-													</div> -->
+													</div>
 					
 					<input type="submit" class="button" name="update_cart" value="Обновить корзину" />
 
 					
-					<!-- <input type="hidden" id="_wpnonce" name="_wpnonce" value="fa2640b163" /><input type="hidden" name="_wp_http_referer" value="/shopper-woocommerce-theme/cart/" />	 -->			</td>
-			</tr>
+					<!- <input type="hidden" id="_wpnonce" name="_wpnonce" value="fa2640b163" /><input type="hidden" name="_wp_http_referer" value="/shopper-woocommerce-theme/cart/" />				</td>
+			</tr> --> 
 
 								</tbody>
 							</table>
 						</form>
-
+						{% if items %}
 						<div class="cart-collaterals">
 							<div class="cart_totals ">
-								<h2>Cart totals</h2>
+								<!-- <h2>Cart totals</h2> -->
 
 								<table cellspacing="0" class="shop_table shop_table_responsive">
 
-									<tr class="cart-subtotal">
+									<!-- <tr class="cart-subtotal">
 										<th>Подитог</th>
 										<td data-title="Subtotal">
 											<span class="woocommerce-Price-amount amount">{{ price_unch }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
 										</td>
-									</tr>
+									</tr> -->
 
 		
 		
@@ -135,6 +149,7 @@
 	
 							</div>
 						</div>
+						{% endif %}
 
 					</div>
 						
@@ -161,9 +176,15 @@
 		<div id="sidebar">
 		
 			<div class="side_box">
-				<h3 class="side_title">Recent Posts</h3>
+				<h3 class="side_title">Последние статьи</h3>
 				<ul>
+					{% for post in recent_posts %}
 					<li>
+						<a href="{% url 'post' post.id %}">{{ post.title }}</a>
+					</li>
+					{% endfor %}
+
+					<!-- <li>
 						<a href="http://dessign.net/shopper-woocommerce-theme/shopper-woocommerce-wordpress-theme-will-help-you-sell/">Shopper Woocommerce wordpress theme will help you sell</a>
 					</li>
 					<li>
@@ -177,7 +198,7 @@
 					</li>
 					<li>
 						<a href="http://dessign.net/shopper-woocommerce-theme/hello-world/">Hello world!</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>		
 		<!-- 	<div class="side_box"><h3 class="side_title">Woocommerce Plugin</h3>			<div class="textwidget">Front matter, or preliminaries, is the first section of a book, and is usually the smallest section in terms of the number of pages. Incorporating the content,style,format,design, and sequence of the various components of a book into a coherent whole.</div>
@@ -195,25 +216,114 @@
 {% endblock %}
 
 {% block script %}
+<form id="csrf-form" name="csrfmiddlewaretoken">{% csrf_token %}</form>
 <script>
 $(document).ready(function () {
+	$('.product-remove').on('click', function(e){
+		$that = $(this);
+		e.preventDefault()
+
+		setTimeout(function(){
+			
+			var url = '{% url 'fix_order_in_cart' %}';
+			var data = {};
+			var item_id = $that.find('a').data('product_id');
+			data.item_id = item_id;
+			console.log(item_id)
+			var ruble_symbol = '<span class="woocommerce-Price-currencySymbol">&#8381;</span>';
+
+			var csrf_token = $('#csrf-form [name="csrfmiddlewaretoken"]').val();
+			data["csrfmiddlewaretoken"] = csrf_token;
+			data.amount = 0;
+
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: data,
+				cache: true,
+				success: function () {
+					$that.closest('tr').remove();
+					var total_price_for_that_w_l = $that.closest('td').siblings('.product-subtotal').find('.amount').text();
+					var total_price_for_that = parseInt(total_price_for_that_w_l.substring(0, total_price_for_that_w_l.length - 1));
+					var total_price_w_l = $('.order-total').first().find('.amount').text();
+					var total_price = parseInt(total_price_w_l.substring(0, total_price_w_l.length - 1));
+					total_price -= total_price_for_that;
+					$('.order-total').first().find('.amount').html(total_price + ruble_symbol);
+					console.log('OK');
+
+				},
+				error: function(){
+					console.log("error");
+				}
+			});
+			
+		}, 0);
+	});
+
+
 	$('input.input-text.qty.text').on('input', function(){
-		var amount = parseInt($(this).val());
-		var price_per_item_with_letter = $(this).closest('td').siblings(".product-price").find('.amount').text();
-		var price_per_item = parseInt(price_per_item_with_letter.substring(0, price_per_item_with_letter.length - 1));
+		var $that = $(this);
+		setTimeout(function(){
 
 
-		var subprice_w_l = $(".cart-subtotal").first().find('.amount').text();
-		var subprice = parseInt(subprice_w_l.substring(0, subprice_w_l.length - 1));
-		subprice -= price_per_item; //<---------------------------------------------------------------------------
+
+			var url = '{% url 'fix_order_in_cart' %}';
+			var this_item = $that;
+
+			var amount = parseInt($that.val());
+			console.log('amount:')
+			console.log(amount)
+			var price_per_item_with_letter = $that.closest('td').siblings(".product-price").find('.amount').text();
+			var price_per_item = parseInt(price_per_item_with_letter.substring(0, price_per_item_with_letter.length - 1));
+
+			var prev_total_price_per_item_with_letter = $that.closest('td').siblings(".product-subtotal").find('.amount').text();
+			var prev_total_price_per_item = parseInt(prev_total_price_per_item_with_letter.substring(0, prev_total_price_per_item_with_letter.length - 1));
+
+			var total_price_w_l = $(".order-total").first().find('.amount').text();
+			console.log(total_price_w_l);
+			var total_price = parseInt(total_price_w_l.substring(0, total_price_w_l.length - 1));
+			total_price -= prev_total_price_per_item; //<---------------------------------------------------------------------------
 
 
-		var total_price_per_item = price_per_item * amount;
-		subprice += total_price_per_item;
-		var ruble_symbol = '<span class="woocommerce-Price-currencySymbol">&#8381;</span>';
-		$(this).closest('td').siblings(".product-subtotal").find('.amount').html(total_price_per_item + ruble_symbol);  // with P
-		$('.cart-subtotal').first().find('.amount').html(subprice + ruble_symbol);
-		// var total_price_per_item = parseInt(foo.substring(0, foo.length - 1));
+			var total_price_per_item = price_per_item * amount;
+			total_price += total_price_per_item;
+			var ruble_symbol = '<span class="woocommerce-Price-currencySymbol">&#8381;</span>';
+			// $that.closest('td').siblings(".product-subtotal").find('.amount').html(total_price_per_item + ruble_symbol);  // with P
+			// $('.order-total').first().find('.amount').html(total_price + ruble_symbol);
+			// var total_price_per_item = parseInt(foo.substring(0, foo.length - 1));
+
+			var data = {};
+			var item_id = $that.closest('td').siblings(".product-remove").find('a').data('product_id');
+			data.item_id = item_id;
+
+			var csrf_token = $('#csrf-form [name="csrfmiddlewaretoken"]').val();
+			data["csrfmiddlewaretoken"] = csrf_token;
+			data.amount = amount;
+
+
+
+
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: data,
+				cache: true,
+				success: function () {
+
+
+					this_item.closest('td').siblings(".product-subtotal").find('.amount').html(total_price_per_item + ruble_symbol);  // with P
+					$('.order-total').first().find('.amount').html(total_price + ruble_symbol);
+					console.log($('.order-total').first().find('.amount').html());
+					console.log('OK');
+
+				},
+				error: function(){
+					console.log("error");
+				}
+			});
+
+		}, 0);
+
 
 	});
 });

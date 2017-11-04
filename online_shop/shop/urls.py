@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^get_more_items/$', sv.get_more_items, name="get_more_items"),
     url(r'^get_more_catalog_items/$', sv.get_more_catalog_items, name="get_more_catalog_items"),
     url(r'^get_more_posts', sv.get_more_posts, name="get_more_posts"),
+    url(r'^fix_order_in_cart/$', sv.fix_order_in_cart, name="fix_order_in_cart"),
 
 ]

@@ -15,7 +15,7 @@ def catalog(request, category='all'):
 		session_key = request.session.cycle_key()
 
 	id_already_added_items = []
-	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key)]
+	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key, is_active=True)]
 
 	if category == 'handmade':
 		items = Product.objects.filter(category__name='Авторские изделия').order_by('-id')[:9]
@@ -96,7 +96,7 @@ def item(request, pk):
 		session_key = request.session.cycle_key()
 
 	id_already_added_items = []
-	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key)]
+	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key, is_active=True)]
 
 	if item in all_user_ordered:
 		id_already_added_items.append(int(item.id))
@@ -114,7 +114,7 @@ def cart(request):
 	if not session_key:
 		session_key = request.session.cycle_key()
 
-	items = ItemsInCart.objects.filter(session_key=session_key)
+	items = ItemsInCart.objects.filter(session_key=session_key, is_active=True)
 
 	total_order_price = 0
 
@@ -128,6 +128,26 @@ def cart(request):
 	}
 
 	return render(request, 'cart.html', context)
+
+def fix_order_in_cart(request):
+	session_key = request.session.session_key
+
+	if not session_key:
+		session_key = request.session.cycle_key()
+
+	data = request.POST
+	print(session_key)
+	print(data.get('item_id'))
+	item = ItemsInCart.objects.get(session_key=session_key, item__id=int(data.get('item_id')))
+	item.amount = int(data.get('amount'))
+	print(type(item.amount))
+	if item.amount == 0:
+		item.is_active = False
+	else:
+		item.is_active =  True
+	item.save()
+
+	return HttpResponse('')
 
 
 def cart_adding_ajax(request):
@@ -147,7 +167,11 @@ def cart_adding_ajax(request):
 	# if not created:
 	# 	new_order_in_cart.amount += int(amount)
 	# 	new_order_in_cart.save(force_update=True)
-	new_order = ItemsInCart.objects.create(session_key=session_key, item=item, amount=amount)
+	new_order, created = ItemsInCart.objects.get_or_create(session_key=session_key, item=item, defaults={'amount':amount})
+	if not created:
+		new_order.is_active = True
+		new_order.amount = amount
+		new_order.save(force_update=True)
 	print('SUCCSESSS')
 
 	
@@ -179,7 +203,7 @@ def get_more_items(request):
 		session_key = request.session.cycle_key()
 
 	id_already_added_items = []
-	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key)]
+	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key, is_active=True)]
 	for item in items:
 		if item in all_user_ordered:
 			id_already_added_items.append(int(item.id))
@@ -274,7 +298,7 @@ def get_more_catalog_items(request):
 		session_key = request.session.cycle_key()
 
 	id_already_added_items = []
-	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key)]
+	all_user_ordered = [obj.item for obj in ItemsInCart.objects.filter(session_key=session_key, is_active=True)]
 	for item in items:
 		if item in all_user_ordered:
 			id_already_added_items.append(int(item.id))

@@ -51,23 +51,13 @@
 			<div id="sidebar">
 	
 				<div class="side_box">		
-					<h3 class="side_title">Recent Posts</h3>		
+					<h3 class="side_title">Последние статьи</h3>		
 					<ul>
+						{% for post in recent_posts %}
 						<li>
-							<a href="http://dessign.net/shopper-woocommerce-theme/shopper-woocommerce-wordpress-theme-will-help-you-sell/">Shopper Woocommerce wordpress theme will help you sell</a>
+							<a href="{% url 'post' post.id %}">{{ post.title }}</a>
 						</li>
-						<li>
-							<a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/">With This Free Shopper Theme we can Sell Product</a>
-						</li>
-						<li>
-							<a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/">New Product Will Sell If Your Product is Amazing</a>
-						</li>
-						<li>
-							<a href="http://dessign.net/shopper-woocommerce-theme/this-is-blog-post-here/">Creative Blog Post To Sell Your Product</a>
-						</li>
-						<li>
-							<a href="http://dessign.net/shopper-woocommerce-theme/hello-world/">Hello world!</a>
-						</li>
+						{% endfor %}
 					</ul>
 				</div>		
 				
