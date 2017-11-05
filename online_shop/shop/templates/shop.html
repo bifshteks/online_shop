@@ -39,14 +39,14 @@
 				{% for item in items %}
 
 					<li  class="{% cycle 'home_small_box' 'home_small_box' 'home_small_box home_small_box_last' %}">
-						<a href="http://127.0.0.1/shop/catalog/{{ item.id }}" class="woocommerce-LoopProduct-link">		
+						<a href="{% url 'item' item.id %}" class="woocommerce-LoopProduct-link">		
 							<div>
-								<a href="http://127.0.0.1/shop/catalog/{{ item.id }}">
+								<a href="{% url 'item' item.id %}">
 									<img width="360" height="360" src="{{ item.img1.url }}" class="attachment-home-small-box size-home-small-box wp-post-image" alt=""  />
 								</a>
 							</div>
 							<div class="sb_title">
-								<a href="http://127.0.0.1/shop/catalog/{{ item.id }}">{{ item.title }}</a>
+								<a href="{% url 'item' item.id %}">{{ item.title }}</a>
 							</div>
 			
 							<!-- <div class="sb_price">

@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'main',
     'blog',
     'shop',
+    'taggit',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 
 ]
 
@@ -140,3 +143,5 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main/static/db')
 MEDIA_URL = 'http://127.0.0.1/static/db/'
+
+SITE_ID = 4

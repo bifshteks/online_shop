@@ -105,9 +105,9 @@ p.demo_store{background-color:#000;color:#808080;}.woocommerce small.note{color:
 </ul>			<div class="clear"></div>
 		</div><!--//header_menu-->
 		<div class="header_search">
-			<form role="search" method="get" id="searchform" action="http://dessign.net/shopper-woocommerce-theme/">
-			<input type="text" placeholder="Search" name="s" id="s" />
-			<input type="image" src="http://dessign.net/shopper-woocommerce-theme/wp-content/themes/ShopperWooThemePremium3/images/search-icon.png" />
+			<form role="search" method="get" id="searchform" action="{% url 'search' %}">
+				<input type="text" placeholder="Search" name="s" id="s" />
+				<input type="image" src="http://dessign.net/shopper-woocommerce-theme/wp-content/themes/ShopperWooThemePremium3/images/search-icon.png" />
 			</form>
 		</div><!--//header_search-->		
 		<div class="clear"></div>

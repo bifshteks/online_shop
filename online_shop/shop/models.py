@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from taggit.managers import TaggableManager
 
 
 class Category(models.Model):
@@ -24,6 +25,7 @@ class Product(models.Model):
 	category = models.ForeignKey(Category, verbose_name="Категория", blank=True, null=True, default=None, on_delete=models.SET_NULL)
 	img1 = models.FileField(upload_to='', verbose_name="Изображение 1")
 	discount = models.IntegerField(verbose_name="Скидка в процентах", blank=True, default=0)
+	tags = TaggableManager(help_text='Введите ключевые слова или словосочетания в нижнем регистре, разделенные запятой', blank=True, verbose_name="Ключевые слова")
 	# img2 = models.FileField(upload_to='', verbose_name="Изображение 2")
 	# img3 = models.FileField(upload_to='', verbose_name="Изображение 3")
 	# img4 = models.FileField(upload_to='', verbose_name="Изображение 4")

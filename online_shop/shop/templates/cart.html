@@ -282,7 +282,7 @@ $(document).ready(function () {
 			var total_price_w_l = $(".order-total").first().find('.amount').text();
 			console.log(total_price_w_l);
 			var total_price = parseInt(total_price_w_l.substring(0, total_price_w_l.length - 1));
-			total_price -= prev_total_price_per_item; //<---------------------------------------------------------------------------
+			total_price -= prev_total_price_per_item; 
 
 
 			var total_price_per_item = price_per_item * amount;

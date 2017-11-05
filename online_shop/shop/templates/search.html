@@ -2,18 +2,148 @@
 
 {% load static %}
 
-{% block title %}Главная{% endblock%}
+{% block title %}Поиск по запросу "{{ search_request }}"{% endblock%}
 
 {% block body_class %}home blog{% endblock %}
+
+{% block link %}
+<style>
+	.woocommerce-tabs {
+		clear: both;
+	}
+
+	ul.tabs.wc-tabs {
+		list-style: none;
+	padding: 0 0 0 1em;
+	margin: 0 0 1.618em;
+	overflow: hidden;
+	position: relative;
+	}
+
+	ul.tabs.wc-tabs::after {
+		clear: both;
+	}
+
+	ul.tabs.wc-tabs::before {
+	    content: ' ';
+		display: table;
+		border-bottom: 1px solid #d3ced3;
+		position: absolute;
+		content: ' ';
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		border-bottom: 1px solid #d3ced2;
+		z-index: 1;
+	}
+
+	ul.tabs.wc-tabs li.active::after {
+		/*box-shadow: -2px 2px 0 #fff;*/
+	}
+
+	ul.tabs.wc-tabs li.active::before {
+		box-shadow: 2px 2px 0 #fff;
+	}
+
+	ul.tabs.wc-tabs li::after {
+		right: -6px;
+		-webkit-border-bottom-left-radius: 4px;
+		-moz-border-bottom-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		border-width: 0 0 1px 1px !important;
+		box-shadow: -2px 2px 0 #ebe9eb;
+		/*border: 1px solid #d3ced3;*/
+		position: absolute;
+		bottom: -1px;
+		width: 5px;
+		height: 5px;
+		content: " ";
+	}
+
+	ul.tabs.wc-tabs li::after,
+	ul.tabs.wc-tabs li::before {
+		border: 1px solid #d3ced2;
+		position: absolute;
+		bottom: -1px;
+		width: 5px;
+		height: 5px;
+		content: ' ';
+	}
+
+	ul.tabs.wc-tabs li::before {
+		left: -6px;
+		-webkit-border-bottom-right-radius: 4px;
+		-moz-border-bottom-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+		border-width: 0 1px 1px 0;
+		box-shadow: 2px 2px 0 #ebe9eb;
+	}
+
+	ul.tabs.wc-tabs li {
+		display: inline-block;
+		border: 1px solid #d3ced3;
+
+		background-color: #ebe9eb;/*
+		display: inline-block;*/
+		position: relative;
+		/*z-index: 0;*/
+		border-radius: 4px 4px 0 0;
+		margin: 0 -5px;
+		padding: 0 1em;
+	}
+
+	ul.tabs.wc-tabs li.active {
+		background: #fff;
+		border-bottom-color: #fff;
+		z-index: 2;
+	}
+
+	ul.tabs.wc-tabs li.active a {
+		color: inherit;
+		text-shadow: inherit;
+	}
+
+	ul.tabs.wc-tabs li a {
+		color: #515151;
+		display: inline-block;
+		padding: .5em 0;
+		font-weight: 700;
+		text-decoration: none;
+	}
+</style>
+
+{% endblock %}
 
 
 {% block content %}
 <section id="content">
 	<div class="container woocommerce">
-	
-						
-		<div id="posts_cont">
-			{% for item in products %}
+
+		<div class="woocommerce-tabs wc-tabs-wrapper">
+			<ul class="tabs wc-tabs" role="tablist">
+				<li class="description_tab active" data-for_tab="tab-products">
+					<a style="cursor: pointer;">Товары по запросу</a>
+				</li>
+				<li class="reviews_tab" data-for_tab="tab-articles">
+					<a style="cursor: pointer;">Статьи по запросу</a>
+				</li>
+			</ul>
+
+		
+
+		</div>
+		
+		<!-- <div class="tab-products" style="display: none">товары</div> -->
+		
+
+
+
+
+
+
+
+		<div id="posts_cont" class="tab-products">
+			{% for item in items %}
 								
 			<div  class="{% cycle 'home_small_box' 'home_small_box' 'home_small_box home_small_box_last' %} ">
 	
@@ -63,21 +193,81 @@
 
 
 			{% cycle '' '' '<div class="home_small_box clear"></div>' %}
+			{% empty %}
+			<p>К сожалению товаров по запросу не найдено</p>
 
 				
 			{% endfor %}									
 										
 		</div>
+
+		<div class="tab-articles" style="display: none">
+			{% for post in posts %}
+								
+			<div  class="{% cycle 'home_small_box' 'home_small_box' 'home_small_box home_small_box_last' %} ">
+	
+				<a href="{% url 'post' post.id %}" class="woocommerce-LoopProduct-link">
+
+				<div>
+				<a href="{% url 'post' post.id %}/">
+					<img width="360" height="360" src="{{ post.img.url }}" class="attachment-home-small-box size-home-small-box wp-post-image" alt="" s sizes="(max-width: 360px) 100vw, 360px" />	
+				</a>		
+				</div>
+					<div class="sb_title">
+						<a href="{% url 'post' post.id %}/">{{ post.title }}</a>
+					</div>
+					
+					<div class="prod_meta">
+						<!-- <div class="prod_meta_button">
+							<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
+
+											
+								<a rel="nofollow" data-product_id="{{ post.id }}" class="button product_type_simple add_to_cart_button ajax_add_to_cart{% if post.id in list_of_added_posts %} added{% endif %}">{% if post.id not in list_of_added_posts %}В корзину{% else %}Добавлено{% endif %}</a>
+								<a href="#" class="added_to_cart" title="View cart" {% if post.id not in list_of_added_posts %} style="display: none;"{% endif %}>View cart</a>
+							</p>			
+						</div> --> <!-- //prod_meta_button -->
+						<!-- <div class="sb_price" style="text-align: right">
+							<span class="price">
+							{% if post.get_discount_price == post.price %}
+								<span class="woocommerce-Price-amount amount">{{ post.price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+							{% else %}
+								<del>
+									<span class="woocommerce-Price-amount amount">
+										{{ post.price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+								</del>
+								<ins>
+									<span class="woocommerce-Price-amount amount">{{ post.get_discount_price }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
+								</ins>
+							{% endif %}
+							</span>
+
+						</div> -->
+						<div class="prod_meta_link">
+							<a href="{% url 'post' post.id %}">ЧИТАТЬ</a>
+						</div>
+					</div> <!-- //prod_meta -->
+				</a>
+			</div>
+
+
+
+			{% cycle '' '' '<div class="home_small_box clear"></div>' %}
+			{% empty %}
+			<p>К сожалению товаров по запросу не найдено</p>
+
+				
+			{% endfor %}				
+		</div>
 						
-		<div class="load_more_cont">
+		<!-- <div class="load_more_cont">
 			<div align="center">
 				<div class="load_more_text">
 					<a href="#" data-url="{% url 'get_more_items' %}">LOAD MORE PRODUCT</a>				
 				</div>
 			</div>
-		</div>        			
+		</div>        		 -->	
 						
-		<div id="max_pages_id" style="display: none;">2</div>					
+		<!-- <div id="max_pages_id" style="display: none;">2</div>					 -->
 		
 						
 		<div class="clear"></div>
@@ -190,7 +380,23 @@ function($){
 		return false;
 	});
 });
-</script>	
+</script>
+<script>
+	$(document).ready(function(){
+
+		$('ul.tabs').on('click', 'li', function(){
+			if ( !$(this).hasClass('active') ) {
+				$(this).addClass('active');
+				$(this).siblings('li').removeClass('active');
+				var hid_div = $(this).siblings('li').data('for_tab');
+				$('.' + hid_div).css('display', 'none');
+				var active_div = $(this).data('for_tab');
+				$('.' + active_div).css('display', 'block');
+
+			}
+		});
+	});
+</script>
 ﻿{% endblock %}
 
 {% block script %}
