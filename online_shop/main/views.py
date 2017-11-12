@@ -7,6 +7,9 @@ from django.views.generic.base import TemplateView
 
 from shop.models import Product, ItemsInCart
 from blog.models import Posts
+from main.models import Feedback
+from django.http import HttpResponse, JsonResponse
+from django.core.mail import send_mail
 
 class Index(TemplateView):
 	template_name = 'index.html'
@@ -67,3 +70,52 @@ def search(request):
 	}
 	return render(request, 'search.html', context)
 	
+def feedback_ajax(request):
+	data = request.POST
+	name = data.get('cscf[name]')
+	email = data.get('cscf[email]')
+	message = data.get('cscf[message]')
+
+	new_fb = Feedback.objects.create(name=name, email=email, message=message)
+	new_fb.save()
+
+	res_dict = dict()
+	res_dict['errorlist'] = []
+
+	# if not name:
+	# 	res_dict['errorlist'].append(('name', req)
+
+
+
+	if res_dict['errorlist']:
+		res_dict['valid'] = False
+	else:
+		res_dict['valid'] = True
+
+
+	try:
+		subject = 'Новая заявка обратной связи с сайта calm-studio.ru'
+		message = '''
+		Информация по заявке:\n
+		Имя: {}\n
+		E-mail: {}\n
+		Сообщение: {}
+		'''.format(name, email, message)
+
+		# sender = 'calm_studio@mail.ru'
+		sender = 'whitenight.info@mail.ru'
+		receiver = 'artem.pif@mail.ru'
+
+		send_mail(
+			subject,
+			message,
+			sender,
+			[receiver],
+			fail_silently=False
+		)
+		res_dict['sent'] = True
+	except:
+		res_dict['sent'] = False
+
+
+	return JsonResponse(res_dict)

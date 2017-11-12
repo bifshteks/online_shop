@@ -5,6 +5,9 @@ from django.contrib import admin
 from shop.models import Product, ItemsInCart, Category
 
 
+
+
+
 class ProductAdmin(admin.ModelAdmin):
 	list_display = [field.name for field in Product._meta.fields if field.name[:3] != 'img']
 

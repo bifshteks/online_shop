@@ -25,31 +25,35 @@ jQuery(document).ready(function ($) {
             $(label).closest('.control-group').removeClass('error').addClass('success'); // support for bootstrap 2
         }
     });
-
+    console.log('3');
     $form.submit(function (event) {
+        console.log('1');
         event.preventDefault();
-
+        console.log('2');
         if ($form.validate().valid()) {
 
             $button = $(this).find("#cscf_SubmitButton");
             $button.attr("disabled", "disabled");
-
+console.log('21');
             $.ajax({
                 type: "post",
                 dataType: "json",
                 cache: false,
                 url: cscfvars.ajaxurl,
-                data: $($form).serialize() + "&action=cscf-submitform",
-                success: function (response, strText) {
+                data: $($form).serialize(),
+                success: function (response) {
+                    console.log(response);
                     if (response.valid === true) {
+                        console.log('22');
                         //show sent message div
                         $formdiv = $div.find(".cscfForm");
                         $formdiv.css('display', 'none');
                         $messagediv = $div.find(".cscfMessageSent");
                         if (response.sent === false) {
                             $messagediv = $div.find(".cscfMessageNotSent");
+                            console.log('24');
                         }
-
+console.log('23');
                         $messagediv.css('display', 'block');
 
                         if (isScrolledIntoView($div) == false) {
@@ -58,12 +62,15 @@ jQuery(document).ready(function ($) {
                                     scrollTop: jQuery($div.selector)
                                         .offset().top
                                 }, 'slow');
+                                console.log('25');
                         }
                     }
 
                     else {
+                        console.log('else')
                         $.each(response.errorlist, function (name, value) {
                             $errele = $form.find("div[for='cscf_" + name + "']");
+                            console.log('26');
                             $errele.html(value);
                             $errele.closest('.form-group').removeClass('has-success').addClass('has-error');
                             $errele.closest('.control-group').removeClass('success').addClass('error'); // support for bootstrap 2
@@ -74,8 +81,10 @@ jQuery(document).ready(function ($) {
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     if (window.console) {
                         console.log("Status: " + textStatus + "Error: " + errorThrown + "Response: " + XMLHttpRequest.responseText);
+                        console.log('28');
                     }
                     $button.removeAttr("disabled");
+                    console.log('27');
 
                 }
 

@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^about/$', views.flatpage, {'url': '/about/'}, name="about"),
     url(r'^contacts/$', mv.contacts, name="contacts"),
     url(r'^search/$', mv.search, name="search"),
+    url(r'^feedback_ajax/$', mv.feedback_ajax, name='feedback_ajax'),
 ]

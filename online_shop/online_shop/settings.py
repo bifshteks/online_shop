@@ -41,12 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
+    'ckeditor',
+    'ckeditor_uploader',
     'main',
     'blog',
     'shop',
     'taggit',
-    'django.contrib.sites',
-    'django.contrib.flatpages',
+    # 'cadmin',
 
 ]
 
@@ -145,3 +148,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'main/static/db')
 MEDIA_URL = 'http://127.0.0.1/static/db/'
 
 SITE_ID = 4
+
+####################################
+    ##  CKEDITOR CONFIGURATION ##
+####################################
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
+
+###################################
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_POST = 469
+
+EMAIL_HOST_USER = 'whitenight.info@mail.ru'
+EMAIL_HOST_PASSWORD = 'ghjcvjnhtnmgjxne'
+
+EMAIL_USE_TLS = True

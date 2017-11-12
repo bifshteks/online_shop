@@ -101,7 +101,7 @@
 							<a href="{% url 'post' post.id %}">{{ post.title }}</a>
 						</div>
 						<div class="sb_price">
-							{{ post.text|cut_text:460 }}
+							{{ post.text|cut_text:460|safe }}
 						</div>
 						<p>
 							<a href="{% url 'post' post.id %}" class="read_more" data-id="{{ post.id }}">READ MORE</a>

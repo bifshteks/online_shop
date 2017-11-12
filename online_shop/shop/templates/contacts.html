@@ -11,79 +11,51 @@
 	<div class="container">
 	
 		<div class="single_left">
-			<div class="single_post_cont">
-			
-							
-				
-					
-					<div class="single_inside_content">
-					
-						<p>Use Free Plugin “<a href="https://wordpress.org/plugins/clean-and-simple-contact-form-by-meg-nicholas/" target="_blank">Contact Form Clean and Simple</a>”</p>
-<div id="cscf" class="cscfBlock">	
-	<div class="cscfMessageSent" style="display:none;">
-		<h3>Message Sent</h3>
-		<p>Thank you for your message, we will be in touch very shortly. </p>	
-	</div>
-	<div class="cscfMessageNotSent" style="display:none;">
-		<p>Sorry, there has been a problem and your message was not sent.</p>	
-	</div>
-	<div class="cscfForm">
-		<p>Please enter your contact details and a short message below and I will try to answer your query as soon as possible.</p>
-		<form role="form" id="frmCSCF" name="frmCSCF" method="post">
-			<input type="hidden" id="cscf_nonce" name="cscf_nonce" value="e3fb253368" />
-			<input type="hidden" name="_wp_http_referer" value="/shopper-woocommerce-theme/contact/" />
-			<input type="hidden" name="post-id" value="10">						<!-- name -->			
-			<div class="control-group form-group">
-				<label for="cscf_name">Имя:</label>
-				<div class="">
-					<input class="form-control input-xlarge" data-rule-required="true" data-msg-required="Пожалуйста, напишите свое имя." type="text" id="cscf_name" name="cscf[name]" value="" placeholder="Ваше Имя"/>
-				</div>
-				<span for="cscf_name" class="help-inline help-block error" style="display:none;"></span>			
-			</div>			<!--email address-->			
-			<div class="control-group form-group">				
-				<label for="cscf_email">Email адрес:</label>				
-				<div class="">										
-					<input class="form-control input-xlarge" data-rule-required="true" data-rule-email="true" data-msg-required="Пожалуйста, введите корректный e-mail адрес." data-msg-email="Пожалуйста, введите корректный e-mail адрес." type="email" id="cscf_email" name="cscf[email]" value="" placeholder="Ваш Email Адрес"/>				
-				</div>                
-				<span for="cscf_email" class="help-inline help-block error" style="display:none;"></span>			
-			</div>							<!--confirm email address -->				
-			<!-- <div class="control-group form-group">					
-				<label for="cscf_confirm-email">Confirm Email Address:</label>					
-				<div class="">												
-					<input class="form-control input-xlarge" data-rule-required="true" data-rule-email="true" data-rule-equalTo="#cscf_email" data-msg-required="Please enter the same email address again." data-msg-email="Please enter a valid email address." data-msg-equalTo="Please enter the same email address again." type="email" id="cscf_confirm-email" name="cscf[confirm-email]"	 value="" placeholder="Confirm Your Email Address"/>					
-				</div>                
-				<span for="cscf_confirm-email" class="help-inline help-block error" style="display:none;"></span>				
-			</div>		 -->				<!-- message -->			
-			<div class="control-group form-group">				
-				<label for="cscf_message">Сообщение:</label>				
-				<div class="">										
-					<textarea class="form-control input-xlarge" data-rule-required="true" data-msg-required="Пожалуйста, напишите сообщение." id="cscf_message" name="cscf[message]" rows="10" placeholder="Ваше Сообщение"></textarea>				
-				</div>					
-				<span for="cscf_message" class="help-inline help-block error" style="display:none;"></span>			
-			</div>						<!-- recaptcha -->						
-			<input type="submit" id="cscf_SubmitButton" class="btn btn-default" value="Send Message"/>
-		</form>
-	</div>
-</div>
-						
-					</div><!--//single_inside_content-->
-					
-					<br /><br />
-					
-															
-					
-					<!--<div class="next_prev_cont">
-						<div class="left">
-							 <a href="http://dessign.net/shopper-woocommerce-theme/about/" rel="prev"><i>Previous post</i><br />About</a> 
+			<div class="single_post_cont">	
+				<div class="single_inside_content">
+					<div id="cscf" class="cscfBlock">	
+						<div class="cscfMessageSent" style="display:none;">
+							<h3>Сообщение Отправлено</h3>
+							<p>Спасибо за обращение. В ближайшее время мы обязательно с Вами свяжемся.</p>	
 						</div>
-						<div class="right">
-							 <a href="http://dessign.net/shopper-woocommerce-theme/blog/" rel="next"><i>Next post</i><br />Blog</a> 
+						<div class="cscfMessageNotSent" style="display:none;">
+							<p>Упс, кажется в работе сайта возникли какие-то ошибки.<br/> Наш программист уже взял в руки бубен и по окончанию его танца ошибка будет устранена. Если Вы не готовы ждать - можете отправить сообщение на нашу электронную почту <strong>calm_studio@mail.ru</strong></p>
 						</div>
-						<div class="clear"></div>
-					</div>--><!--//next_prev_cont-->							
+						<div class="cscfForm">
+							<p>Пожалуйста, введите Ваше сообщение, и мы постараемся ответить как можно скорее.</p>
+							<form role="form" id="frmCSCF" name="frmCSCF" method="post" data-url="{% url 'feedback_ajax' %}">
+								{% csrf_token %}
+								<!-- name -->
+								<div class="control-group form-group">
+									<label for="cscf_name">Имя:</label>
+									<div class="">
+										<input class="form-control input-xlarge" data-rule-required="true" data-msg-required="Пожалуйста, напишите свое имя." type="text" id="cscf_name" name="cscf[name]" value="" placeholder="Ваше Имя"/>
+									</div>
+									<span for="cscf_name" class="help-inline help-block error" style="display:none;"></span>			
+								</div>			
+								<!--email address-->			
+								<div class="control-group form-group">				
+									<label for="cscf_email">Email адрес:</label>				
+									<div class="">										
+										<input class="form-control input-xlarge" data-rule-required="true" data-rule-email="true" data-msg-required="Пожалуйста, введите e-mail адрес." data-msg-email="Пожалуйста, введите корректный e-mail адрес." type="email" id="cscf_email" name="cscf[email]" value="" placeholder="Ваш Email Адрес"/>				
+									</div>                
+									<span for="cscf_email" class="help-inline help-block error" style="display:none;"></span>			
+								</div>
+								<!-- message -->			
+								<div class="control-group form-group">				
+									<label for="cscf_message">Сообщение:</label>				
+									<div class="">										
+										<textarea class="form-control input-xlarge" data-rule-required="true" data-msg-required="Пожалуйста, напишите сообщение." id="cscf_message" name="cscf[message]" rows="10" placeholder="Ваше Сообщение"></textarea>				
+									</div>					
+									<span for="cscf_message" class="help-inline help-block error" style="display:none;"></span>			
+								</div>						<!-- recaptcha -->						
+								<input type="submit" id="cscf_SubmitButton" class="btn btn-default" value="Отправить сообщение"/>
+							</form>
+						</div>
+					</div>
 					
-				            					
-			
+				</div><!--//single_inside_content--><br /><br />
+
 			</div><!--//single_post_cont-->
 		
 		</div><!--//single_left-->
@@ -105,9 +77,15 @@
 		
 	</div><!-//container-->
 </section><!--//content-->
+<div class="clear"></div>
 {% endblock %}
 
 ﻿{% block script %}
+<script type="text/javascript">
+/* <![CDATA[ */
+var cscfvars = {"ajaxurl": $("#frmCSCF").data('url')};
+/* ]]> */
+</script>
 <link rel='stylesheet' id='cscf-bootstrap-css'  href='http://dessign.net/shopper-woocommerce-theme/wp-content/plugins/clean-and-simple-contact-form-by-meg-nicholas/css/bootstrap-forms.min.css?ver=4.6.1' type='text/css' media='all' />
 
 <script type='text/javascript' src='{% static 'js/add-to-cart.min.js' %}'></script>
@@ -116,6 +94,15 @@
 <script type='text/javascript' src='{% static 'js/jquery.validate.min.js' %}'></script>
 
 <script type='text/javascript' src='{% static 'js/jquery.validate.contact.form.js' %}'></script>
+
+<!-- <script>
+	$(document).ready(function(){
+		$("#frmCSCF").validate(function(){
+			$(this).parent().css('display', 'none');
+			$(".cscfMessageSent").css('display', 'block');
+		})
+	});
+</script> -->
 
 {% endblock %}
 

@@ -21,5 +21,7 @@ urlpatterns = [
     url(r'^', include('main.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^shop/', include('shop.urls')),
+    # url(r'^cadmin/', include('cadmin.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
 ]

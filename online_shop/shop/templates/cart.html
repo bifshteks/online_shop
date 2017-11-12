@@ -50,7 +50,7 @@
 
 									<td class="product-quantity" data-title="Quantity">
 										<div class="quantity">
-											<input type="number" class="input-text qty text" step="1" min="0" name="" value="{{ item.amount }}" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
+											<input type="number" class="input-text qty text" step="1" min="0" name="" value="{{ item.amount }}" size="4" pattern="[0-9]*" inputmode="numeric" />
 										</div>
 									</td>
 
@@ -68,49 +68,17 @@
 									<td class="product-quantity"></td>
 									<td class="product-subtotal"></td>
 								</tr>
-
+								
 
 								{% endfor %}
-<!-- 								<tr class="woocommerce-cart-form__cart-item cart_item">
-
-						<td class="product-remove">
-							<a href="http://dessign.net/shopper-woocommerce-theme/cart/?remove_item=735b90b4568125ed6c3f678819b6e058&#038;_wpnonce=fa2640b163" class="remove" aria-label="Remove this item" data-product_id="67" data-product_sku="Bags89">&times;</a>						</td>
-
-						<td class="product-thumbnail">
-							<a href="http://dessign.net/shopper-woocommerce-theme/product/creative-modern-bags/"><img width="180" height="180" src="//dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/box2-180x180.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="//dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/box2-180x180.jpg 180w, //dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/box2-150x150.jpg 150w, //dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/box2-360x360.jpg 360w, //dessign.net/shopper-woocommerce-theme/wp-content/uploads/2015/03/box2-300x300.jpg 300w" sizes="(max-width: 180px) 100vw, 180px" /></a>						</td>
-
-						<td class="product-name" data-title="Product">
-							<a href="http://dessign.net/shopper-woocommerce-theme/product/creative-modern-bags/">Creative Modern Bags</a>						</td>
-
-						<td class="product-price" data-title="Price">
-							<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#36;</span>59.00</span>						</td>
-
-						<td class="product-quantity" data-title="Quantity">
-								<div class="quantity">
-		<input type="number" class="input-text qty text" step="1" min="0" max="" name="cart[735b90b4568125ed6c3f678819b6e058][qty]" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
-	</div>
-							</td>
-
-						<td class="product-subtotal" data-title="Total">
-							<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#36;</span>59.00</span>						</td>
-					</tr> -->
-					
-			
-			<!-- <tr>
-				<td colspan="6" class="actions">
-
-											div class="coupon">
-							<label for="coupon_code">Coupon:</label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Coupon code" /> <input type="submit" class="button" name="apply_coupon" value="Apply coupon" />
-													</div>
-					
-					<input type="submit" class="button" name="update_cart" value="Обновить корзину" />
-
-					
-					<!- <input type="hidden" id="_wpnonce" name="_wpnonce" value="fa2640b163" /><input type="hidden" name="_wp_http_referer" value="/shopper-woocommerce-theme/cart/" />				</td>
-			</tr> --> 
-
 								</tbody>
 							</table>
+							{% for item in items %}
+							{% empty %}
+							<p class="return-to-shop">
+								<a class="button wc-backward" href="{% url 'catalog_default' %}">Вернуться к покупкам</a>
+							</p>
+							{% endfor %}
 						</form>
 						{% if items %}
 						<div class="cart-collaterals">
