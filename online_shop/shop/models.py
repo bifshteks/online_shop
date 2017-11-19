@@ -66,17 +66,3 @@ class ItemsInCart(models.Model):
 		print('%%%%%%%%$#$#$#$#$$#$', int(self.amount))
 		print(self.total_price)
 		return super(ItemsInCart, self).save(*args, **kwargs)
-
-
-
-
-
-
-
-class Order(models.Model):
-	name = ''
-	phone = ''
-	email = ''
-
-
-

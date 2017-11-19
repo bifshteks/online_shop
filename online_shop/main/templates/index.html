@@ -10,15 +10,11 @@
 {% block content %}
 <section id="content">
 	<div class="container woocommerce">
-	
 						
 		<div id="posts_cont">
 			{% for item in products %}
-								
 			<div  class="{% cycle 'home_small_box' 'home_small_box' 'home_small_box home_small_box_last' %} ">
-	
 				<a href="{% url 'item' item.id %}/" class="woocommerce-LoopProduct-link">
-
 				<div>
 				<a href="{% url 'item' item.id %}/">
 					<img width="360" height="360" src="{{ item.img1.url }}" class="attachment-home-small-box size-home-small-box wp-post-image" alt="" s sizes="(max-width: 360px) 100vw, 360px" />	
@@ -27,16 +23,13 @@
 					<div class="sb_title">
 						<a href="{% url 'item' item.id %}/">{{ item.title }}</a>
 					</div>
-					
 					<div class="prod_meta">
 						<div class="prod_meta_button">
 							<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
-
-											
 								<a rel="nofollow" data-product_id="{{ item.id }}" class="button product_type_simple add_to_cart_button ajax_add_to_cart{% if item.id in list_of_added_items %} added{% endif %}">{% if item.id not in list_of_added_items %}В корзину{% else %}Добавлено{% endif %}</a>
 								<a href="#" class="added_to_cart" title="View cart" {% if item.id not in list_of_added_items %} style="display: none;"{% endif %}>View cart</a>
 							</p>			
-						</div> <!-- //prod_meta_button -->
+						</div>
 						<div class="sb_price" style="text-align: right">
 							<span class="price">
 							{% if item.get_discount_price == item.price %}
@@ -53,22 +46,14 @@
 							</span>
 
 						</div>
-						<!--<div class="prod_meta_link">
-							<a href="http://dessign.net/shopper-woocommerce-theme/product/design-and-relax/">LEARN MORE</a>
-						</div>-->
-					</div> <!-- //prod_meta -->
+					</div>
 				</a>
 			</div>
-
-
-
 			{% cycle '' '' '<div class="home_small_box clear"></div>' %}
 
-				
 			{% endfor %}									
 										
 		</div>
-						
 		<div class="load_more_cont">
 			<div align="center">
 				<div class="load_more_text">
@@ -76,16 +61,16 @@
 				</div>
 			</div>
 		</div>        			
-						
-		<div id="max_pages_id" style="display: none;">2</div>					
-		
-						
+		<div id="max_pages_id" style="display: none;">2</div>
 		<div class="clear"></div>
 		
-	</div><!--//container-->
-</section><!--//content-->
+	</div>
+</section>
 <a id="a_for_ajax_adding_cart" data-url="{% url 'cart_adding' %}" ></a>
 <form id="csrf-form" name="csrfmiddlewaretoken">{% csrf_token %}</form>
+{% endblock %}
+
+{% block script %}
 <script type="text/javascript">
 $(document).ready(
 function($){
@@ -191,8 +176,5 @@ function($){
 	});
 });
 </script>	
-﻿{% endblock %}
-
-{% block script %}
 <script src="{% static 'js/my_adding.js' %}"></script>
 {% endblock %}

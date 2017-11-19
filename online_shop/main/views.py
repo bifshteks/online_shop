@@ -82,11 +82,6 @@ def feedback_ajax(request):
 	res_dict = dict()
 	res_dict['errorlist'] = []
 
-	# if not name:
-	# 	res_dict['errorlist'].append(('name', req)
-
-
-
 	if res_dict['errorlist']:
 		res_dict['valid'] = False
 	else:

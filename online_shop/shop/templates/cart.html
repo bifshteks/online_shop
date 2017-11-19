@@ -83,66 +83,25 @@
 						{% if items %}
 						<div class="cart-collaterals">
 							<div class="cart_totals ">
-								<!-- <h2>Cart totals</h2> -->
-
 								<table cellspacing="0" class="shop_table shop_table_responsive">
-
-									<!-- <tr class="cart-subtotal">
-										<th>Подитог</th>
-										<td data-title="Subtotal">
-											<span class="woocommerce-Price-amount amount">{{ price_unch }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span>
-										</td>
-									</tr> -->
-
-		
-		
-		
-		
-		
 									<tr class="order-total">
 										<th>Итог</th>
 										<td data-title="Total">
 											<strong><span class="woocommerce-Price-amount amount">{{ price_unch }}<span class="woocommerce-Price-currencySymbol">&#8381;</span></span></strong>
 										</td>
 									</tr>
-
-		
 								</table>
-
 								<div class="wc-proceed-to-checkout">
-		
 									<a href="http://dessign.net/shopper-woocommerce-theme/checkout/" class="checkout-button button alt wc-forward">Proceed to checkout</a>
 								</div>
-
-	
 							</div>
 						</div>
 						{% endif %}
-
 					</div>
-						
-				</div><!--//single_inside_content--><br /><br />
-					
-															
-					
-					<!--<div class="next_prev_cont">
-						<div class="left">
-							 <a href="http://dessign.net/shopper-woocommerce-theme/sample-page/" rel="prev"><i>Previous post</i><br />Sample Page</a> 
-						</div>
-						<div class="right">
-							 <a href="http://dessign.net/shopper-woocommerce-theme/about/" rel="next"><i>Next post</i><br />About</a> 
-						</div>
-						<div class="clear"></div>
-					</div>--><!--//next_prev_cont-->							
-					
-				            					
-			
-			</div><!--//single_post_cont-->
-		
-		</div><!--//single_left-->
-		
+				</div><br /><br />
+			</div>
+		</div>
 		<div id="sidebar">
-		
 			<div class="side_box">
 				<h3 class="side_title">Последние статьи</h3>
 				<ul>
@@ -151,35 +110,12 @@
 						<a href="{% url 'post' post.id %}">{{ post.title }}</a>
 					</li>
 					{% endfor %}
-
-					<!-- <li>
-						<a href="http://dessign.net/shopper-woocommerce-theme/shopper-woocommerce-wordpress-theme-will-help-you-sell/">Shopper Woocommerce wordpress theme will help you sell</a>
-					</li>
-					<li>
-						<a href="http://dessign.net/shopper-woocommerce-theme/with-this-free-shopper-theme-we-can-sell-product/">With This Free Shopper Theme we can Sell Product</a>
-					</li>
-					<li>
-						<a href="http://dessign.net/shopper-woocommerce-theme/new-product-will-sell-if-your-product-is-amazing/">New Product Will Sell If Your Product is Amazing</a>
-					</li>
-					<li>
-						<a href="http://dessign.net/shopper-woocommerce-theme/this-is-blog-post-here/">Creative Blog Post To Sell Your Product</a>
-					</li>
-					<li>
-						<a href="http://dessign.net/shopper-woocommerce-theme/hello-world/">Hello world!</a>
-					</li> -->
 				</ul>
 			</div>		
-		<!-- 	<div class="side_box"><h3 class="side_title">Woocommerce Plugin</h3>			<div class="textwidget">Front matter, or preliminaries, is the first section of a book, and is usually the smallest section in terms of the number of pages. Incorporating the content,style,format,design, and sequence of the various components of a book into a coherent whole.</div>
 		</div>
-		<div class="side_box"><h3 class="side_title">Archives</h3>		<ul>
-			<li><a href='http://dessign.net/shopper-woocommerce-theme/2015/03/'>March 2015</a></li>
-		</ul>
-		</div> -->			
-		</div><!--//sidebar-->		
 		<div class="clear"></div>
-		
-	</div><!--//container-->
-</section><!--//content-->
+	</div>
+</section>
 
 {% endblock %}
 
@@ -192,7 +128,6 @@ $(document).ready(function () {
 		e.preventDefault()
 
 		setTimeout(function(){
-			
 			var url = '{% url 'fix_order_in_cart' %}';
 			var data = {};
 			var item_id = $that.find('a').data('product_id');
@@ -232,9 +167,6 @@ $(document).ready(function () {
 	$('input.input-text.qty.text').on('input', function(){
 		var $that = $(this);
 		setTimeout(function(){
-
-
-
 			var url = '{% url 'fix_order_in_cart' %}';
 			var this_item = $that;
 
@@ -256,9 +188,6 @@ $(document).ready(function () {
 			var total_price_per_item = price_per_item * amount;
 			total_price += total_price_per_item;
 			var ruble_symbol = '<span class="woocommerce-Price-currencySymbol">&#8381;</span>';
-			// $that.closest('td').siblings(".product-subtotal").find('.amount').html(total_price_per_item + ruble_symbol);  // with P
-			// $('.order-total').first().find('.amount').html(total_price + ruble_symbol);
-			// var total_price_per_item = parseInt(foo.substring(0, foo.length - 1));
 
 			var data = {};
 			var item_id = $that.closest('td').siblings(".product-remove").find('a').data('product_id');
@@ -268,34 +197,24 @@ $(document).ready(function () {
 			data["csrfmiddlewaretoken"] = csrf_token;
 			data.amount = amount;
 
-
-
-
 			$.ajax({
 				url: url,
 				type: 'POST',
 				data: data,
 				cache: true,
 				success: function () {
-
-
 					this_item.closest('td').siblings(".product-subtotal").find('.amount').html(total_price_per_item + ruble_symbol);  // with P
 					$('.order-total').first().find('.amount').html(total_price + ruble_symbol);
 					console.log($('.order-total').first().find('.amount').html());
 					console.log('OK');
-
 				},
 				error: function(){
 					console.log("error");
 				}
 			});
-
 		}, 0);
-
-
 	});
 });
-
 </script>
 {% endblock %}
 ﻿

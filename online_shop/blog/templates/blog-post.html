@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body_class %}post-template-default single single-post postid-97 single-format-standard{% endblock %}
+
+
+
+{% block content %}
+<section id="content">
+	<div class="container">
+	
+		<div class="single_left">
+			<div class="single_post_cont">							
+				<h1 class="single_title">{{ post.title }}</h1>
+				<div class="single_inside_content">
+					<p>
+						<img class="alignnone size-full wp-image-98" src="{{ post.img.url }}" alt="blog1" width="1200" height="750" sizes="(max-width: 1200px) 100vw, 1200px" />
+					</p>
+					<p>{{ post.text|safe }}</p>
+				</div>					
+				<br /><br />
+			</div>
+		</div>
+
+		<div id="sidebar">
+			<div class="side_box">		
+				<h3 class="side_title">Последние статьи</h3>		
+				<ul>
+					{% for post in recent_posts %}
+					<li>
+						<a href="{% url 'post' post.id %}">{{ post.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>		
+		</div>	
+		<div class="clear"></div>
+	</div>
+</section>
+﻿{% endblock %}
+
+
+
+{% block script %}
+<script type='text/javascript' src='{% static 'add-to-cart.min.js' %}'></script>
+{% endblock %}
+
+	

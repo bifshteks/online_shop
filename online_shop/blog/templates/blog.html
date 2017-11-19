@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block title %}Блог{% endblock %}
+
+{% block link %}
+<style>.load_more_text {display: none;}
+.loader{    -webkit-animation: preloader 1.5s infinite linear;    -moz-animation: preloader 1.5s infinite linear;    -ms-animation: preloader 1.5s infinite linear;    -o-animation: preloader 1.5s infinite linear;    animation: preloader 1.5s infinite linear;}
+@-webkit-keyframes preloader {    to { -webkit-transform: rotate(360deg); }}
+@-moz-keyframes preloader {    to { -moz-transform: rotate(360deg); }}
+@-ms-keyframes preloader {    to { -ms-transform: rotate(360deg); }}
+@-o-keyframes preloader {    to { -o-transform: rotate(360deg); }}
+@keyframes preloader {    to { transform: rotate(360deg); }}
+</style>
+{% endblock %}
+
+{% block body_class %}page-template page-template-tpl-blog page-template-tpl-blog-php page page-id-12{% endblock %}
+
+
+{% block content %}
+<section id="content">
+	<div class="container">
+		<div class="single_left">
+			<div id="posts_cont">
+			    {% for post in posts %}
+				<div class="blog_box {% if forloop.last %}blog_box_last{% endif %} ">
+					<div>
+						<a href="{% url 'post' post.id %}">
+							<img width="930" height="400" src="{{ post.img.url }}" class="attachment-st-blog-image size-st-blog-image wp-post-image" alt="" />
+						</a>
+					</div>
+					<div class="sb_title">
+						<a href="{% url 'post' post.id %}">{{ post.title }}</a>
+					</div>
+					<div class="sb_price">
+						{{ post.text|cut_text:460|safe }}
+					</div>
+					<p>
+						<a href="{% url 'post' post.id %}" class="read_more" data-id="{{ post.id }}">READ MORE</a>
+					</p>
+				</div>
+				{% endfor %}
+				<div class="blog_box clear"></div>								
+				<div class="clear"></div>
+			</div>
+			<div class="load_more_cont">
+				<div align="center">
+					<div class="load_more_text">
+						<a href="#" >
+							<img class="loader" src="http://dessign.net/shopper-woocommerce-theme/wp-content/themes/ShopperWooThemePremium3/images/loading-button.png" />
+						</a>				
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="sidebar">
+			<div class="side_box">		
+				<h3 class="side_title">Последние статьи</h3>		
+				<ul>
+					{% for post in recent_posts %}
+					<li>
+						<a href="{% url 'post' post.id %}">{{ post.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>		
+		</div>	
+		<div class="clear"></div>
+	</div>
+</section>
+{% endblock %}
+
+
+{% block script %}
+<form id="csrf-form" name="csrfmiddlewaretoken" action="{% url 'get_more_posts' %}">{% csrf_token %}</form>
+<script type="text/javascript">
+      $(document).ready(function () {
+
+      		var isLast = false;
+
+            function morePosts() {
+				var url = $('#csrf-form').attr('action');
+				var item_id = $('#posts_cont .blog_box:not(.clear)').last().find('a.read_more').data('id');
+				var data = {};
+				data.last_id = item_id;
+				var csrf_token = $('#csrf-form [name="csrfmiddlewaretoken"]').val();
+				data["csrfmiddlewaretoken"] = csrf_token;
+
+				$.ajax({
+					url: url,
+					type: 'POST',
+					data: data,
+					cache: true,
+					success: function (data) {
+						if ( data.is_it_last == true ) {
+							isLast = true;
+						};
+
+						console.log('OK');
+						var len = data.item.length;
+						$.each(data.item, function(k, v){
+							var post_class = '';
+
+							if ( k == len - 1 ) {
+								post_class = 'blog_box blog_box_last'
+							} else {
+								post_class = 'blog_box'
+							};
+
+							$('.blog_box.clear').before('\
+							<div class="' + post_class + '">\
+								<div>\
+									<a href="' + v.post_url + '">\
+										<img width="930" height="400" src="' + v.img_url + '" class="attachment-st-blog-image size-st-blog-image wp-post-image" alt="" />\
+									</a>\
+								</div>\
+								<div class="sb_title">\
+									<a href="' + v.post_url + '">' + v.post_title + '</a>\
+								</div>\
+								<div class="sb_price">\
+									' + v.post_short_text + '\
+								</div>\
+								<p>\
+									<a href="' + v.post_url + '" class="read_more" data-id="' + v.post_id + '">READ MORE</a>\
+								</p>\
+							</div><!--//blog_box-->');
+						});
+					},
+					error: function(){
+						console.log("error");
+					}
+				});
+
+
+
+            };
+
+            //When scroll down, the scroller is at the bottom with the function below and fire the morePosts function
+            $(window).scroll(function () {
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                	var loader_block = $('.load_more_text').first();
+                	if ( !loader_block.hasClass('absolute_closed') ) {
+
+	                	loader_block.css('display', 'unset');
+	                    morePosts();
+	                    loader_block.css('display', 'none');
+	                    if ( isLast == true ) {
+	                    	loader_block.addClass('absolute_closed');
+	                    };
+                	};
+                };
+            });
+        });
+
+</script>	
+﻿{% endblock %}
+
+	

@@ -2,8 +2,7 @@
 
 {% load static %}
 
-
-	<title>Creative Pillow Design &laquo;  Shopper WooCommerce eCommerce WordPress Theme</title> 
+<title>Creative Pillow Design &laquo;  Shopper WooCommerce eCommerce WordPress Theme</title> 
 
 {% block link %}
 <link rel='stylesheet' id='photoswipe-css'  href='{% static "css/photoswipe.css" %}' type='text/css' media='all' />
@@ -11,15 +10,7 @@
 {% endblock %}
 
 
-
-
-
-	
-	
-
 {% block body_class %}product-template-default single single-product postid-83 woocommerce woocommerce-page{% endblock %}
-
-
 
 
 {% block content %}
@@ -27,15 +18,11 @@
 <div class="container">
 	<div id="container">
 		<div id="content" role="main">
-			<!-- <nav class="woocommerce-breadcrumb">
-				<a href="http://dessign.net/shopper-woocommerce-theme">Home</a>&nbsp;&#47;&nbsp;<a href="http://dessign.net/shopper-woocommerce-theme/product-category/accessories/">Accessories</a>&nbsp;&#47;&nbsp;Creative Pillow Design
-			</nav> -->
 			{% if item.id in list_of_added_items %}
 			<div class="woocommerce-message"><a href="{% url 'cart' %}" class="button wc-forward">Корзина</a> Товар “{{ item.title }}” был добавлен в корзину.</div>
 			{% endif %}
 
 			<div id="product-83" class="post-83 product type-product status-publish has-post-thumbnail product_cat-accessories product_cat-all-product product_cat-clearance first instock sale virtual shipping-taxable purchasable product-type-simple">
-
 				<span class="onsale">Sale!</span>
 					<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 0; transition: opacity .25s ease-in-out;">
 						<figure class="woocommerce-product-gallery__wrapper">
@@ -46,9 +33,7 @@
 							</div>
 						</figure>
 					</div>
-
 					<div class="summary entry-summary">
-
 						<h1 class="product_title entry-title">{{ item.title }}</h1>
 						<p class="price">
 							{% if item.get_discount_price == item.price %}
@@ -67,7 +52,6 @@
 							<p>{{ item.description }}</p>
 						</div>
 
-	
 						<form class="cart" >
 							<div class="quantity">
 								<input type="number" id="amount_input" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" />
@@ -76,37 +60,18 @@
 							<button id="button_add_to_cart" type="submit" name="add-to-cart" class="single_add_to_cart_button button alt" data-product_id="{{ item.id }}" data-is_added="{% if item.id in list_of_added_items %}added{% else %}not{% endif %}">Добавить в корзину</button>
 
 						</form>
-
-	
-						<!-- <div class="product_meta">
-
-	
-	
-							<span class="sku_wrapper">SKU: <span class="sku">Pillow</span></span>
-
-	
-							<span class="posted_in">Categories: <a href="http://dessign.net/shopper-woocommerce-theme/product-category/accessories/" rel="tag">Accessories</a>, <a href="http://dessign.net/shopper-woocommerce-theme/product-category/all-product/" rel="tag">All Product</a>, <a href="http://dessign.net/shopper-woocommerce-theme/product-category/clearance/" rel="tag">Clearance</a></span>
-	
-	
-						</div> -->
-
-
-					</div><!-- .summary -->
+					</div>
 			</div>		
-		</div> <!--//sidebar-->
-
+		</div>
 	</div>
 	<div class="clear"></div>
 </div>
 {% endblock %}
-﻿
-
 
 
 {% block script %}
 <a id="a_for_ajax_adding_cart" data-url="{% url 'cart_adding' %}" data-cart_url="{% url 'cart' %}" data-item_title="{{ item.title }}"></a>
 <form id="csrf-form" name="csrfmiddlewaretoken">{% csrf_token %}</form>
-
 
 <script type="application/ld+json">{"@graph":[{"@context":"http:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":"1","item":{"name":"Home","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme"}},{"@type":"ListItem","position":"2","item":{"name":"Accessories","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme\/product-category\/accessories\/"}},{"@type":"ListItem","position":"3","item":{"name":"Creative Pillow Design"}}]},{"@context":"http:\/\/schema.org\/","@type":"Product","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme\/product\/creative-pillow-design\/","url":"http:\/\/dessign.net\/shopper-woocommerce-theme\/product\/creative-pillow-design\/","name":"Creative Pillow Design","offers":[{"@type":"Offer","priceCurrency":"USD","availability":"http:\/\/schema.org\/InStock","sku":"Pillow","image":"http:\/\/dessign.net\/shopper-woocommerce-theme\/wp-content\/uploads\/2015\/03\/pillow1.jpg","description":"Find work that truly matters to you and your life will change. Forget about your traditional recruitment and searching for job. Do what you love. You need to start now, because your dream will follow your passion for art and design. We are small group of passionate designers and architects\u2026Find work that truly matters to you and your life will change. Forget about your traditional recruitment and searching for job. Do what you love. You need to start now, because your dream will follow your passion for art and design. We are small group of passionate designers and architects","seller":{"@type":"Organization","name":"Shopper WooCommerce eCommerce WordPress Theme","url":"http:\/\/dessign.net\/shopper-woocommerce-theme"},"price":"29.00"}]}]}</script>
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
@@ -188,8 +153,7 @@ var wc_single_product_params = {"i18n_required_rating_text":"Please select a rat
 <script type='text/javascript' src='{% static 'js/single-product.min.js' %}'></script>
 
 <script>
-	$(document).ready(
-function($){
+$(document).ready(function($){
 	$('form').submit(function(e){
 		e.preventDefault();
 	});

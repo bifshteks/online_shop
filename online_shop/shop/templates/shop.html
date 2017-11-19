@@ -21,23 +21,10 @@
 				<h1 class="page-title">{{ category_name }}</h1>
 	
 			</div>
-
-
-
-		
-
-		
-
 			<div class="clear"></div>
-
-
-
 			<ul class="products">
-
 				<div id="posts_cont">
-
 				{% for item in items %}
-
 					<li  class="{% cycle 'home_small_box' 'home_small_box' 'home_small_box home_small_box_last' %}">
 						<a href="{% url 'item' item.id %}" class="woocommerce-LoopProduct-link">		
 							<div>
@@ -48,24 +35,13 @@
 							<div class="sb_title">
 								<a href="{% url 'item' item.id %}">{{ item.title }}</a>
 							</div>
-			
-							<!-- <div class="sb_price">
-			
-								<span class="price">
-									<span class="woocommerce-Price-amount amount">
-										<span class="woocommerce-Price-currencySymbol">&#36;</span>{{ item.price }}
-									</span>
-								</span>
-							</div> -->
 							<div class="prod_meta">
 						<div class="prod_meta_button">
-							<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">
-
-											
+							<p class="product woocommerce add_to_cart_inline " style="border:4px solid #ccc; padding: 12px;">	
 								<a rel="nofollow" data-quantity="1" data-product_id="{{ item.id }}" data-product_sku="Relax599" class="button product_type_simple add_to_cart_button ajax_add_to_cart{% if item.id in list_of_added_items %} added{% endif %}">В корзину</a>
 								<a href="#" class="added_to_cart" title="View cart"{% if item.id not in list_of_added_items %} style="display: none;"{% endif %}>View cart</a>
 							</p>			
-						</div> <!-- //prod_meta_button -->
+						</div>
 						<div class="sb_price" style="text-align: right">
 							<span class="price">
 							{% if item.get_discount_price == item.price %}
@@ -82,38 +58,25 @@
 							</span>
 
 						</div>
-						<!--<div class="prod_meta_link">
-							<a href="http://dessign.net/shopper-woocommerce-theme/product/design-and-relax/">LEARN MORE</a>
-						</div>-->
-					</div> <!-- //prod_meta -->
+					</div>
 						</a>
-
-						<!-- <a rel="nofollow" href="/shopper-woocommerce-theme/product-category/all-product/?add-to-cart=85" data-quantity="1" data-product_id="85" data-product_sku="Relax599" class="button product_type_simple add_to_cart_button ajax_add_to_cart" style="display: inline;">Add to cart</a> -->
 					</li>	
 				{% endfor %}					
 					<div class="clear"></div>
-				</div><!--//posts_cont-->
-
+				</div>
 			</ul>
-
-			
-
 			<div class="load_more_cont">
 				<div align="center">
 					<div class="load_more_text">
 						<a href="#" data-url="{% url 'get_more_catalog_items' %}">ЗАГРУЗИТЬ ЕЩЕ</a>
 					</div>
 				</div>
-
 			</div>
 			<div class="clear"></div>
-
 		</div>
 	</div>
 
-
 	<div id="sidebar">
-		
 		<div class="side_box">		
 			<h3 class="side_title">Последние статьи</h3>		
 			<ul>
@@ -124,37 +87,14 @@
 				{% endfor %}
 			</ul>
 		</div>		
-	
-	</div><!--//sidebar-->
+	</div>
 </div>
 <a id="a_for_ajax_adding_cart" data-url="{% url 'cart_adding' %}" ></a>
 ﻿{% endblock %}
 
 
 {% block script %}
-<!-- <script type="application/ld+json">{"@context":"http:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":"1","item":{"name":"Home","@id":"http:\/\/dessign.net\/shopper-woocommerce-theme"}},{"@type":"ListItem","position":"2","item":{"name":"All Product"}}]}</script><script type='text/javascript'>
-/* <![CDATA[ */
-var wc_add_to_cart_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/product-category\/all-product\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"http:\/\/dessign.net\/shopper-woocommerce-theme\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
-/* ]]> */
-</script> -->
-<!-- <script type='text/javascript' src='{% static 'js/add-to-cart.min.js' %}'></script> -->
 <script src="{% static 'js/my_adding.js' %}"></script>
-<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>
-<script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.3'></script>
-<script type='text/javascript'>
-/* <![CDATA[ */
-var woocommerce_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/product-category\/all-product\/?wc-ajax=%%endpoint%%"};
-/* ]]> */
-</script> -->
-<!-- <script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.0.3'></script>
-<script type='text/javascript'>
-/* <![CDATA[ */
-var wc_cart_fragments_params = {"ajax_url":"\/shopper-woocommerce-theme\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/shopper-woocommerce-theme\/product-category\/all-product\/?wc-ajax=%%endpoint%%","fragment_name":"wc_fragments"};
-/* ]]> */
-</script>
-<script type='text/javascript' src='//dessign.net/shopper-woocommerce-theme/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.0.3'></script>
-<script type='text/javascript' src='http://dessign.net/shopper-woocommerce-theme/wp-includes/js/wp-embed.min.js?ver=4.8.2'></script>
-<script src="{% static 'js/scripts.js' %}"></script> -->
 <form id="csrf-form" name="csrfmiddlewaretoken">{% csrf_token %}</form>
 <script type="text/javascript">
 $(document).ready(
